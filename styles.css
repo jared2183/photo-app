@@ -4,9 +4,31 @@
     /* border: 1px solid black; */
 }
 
+/* Nav Bar */
 nav {
     display: flex; 
     justify-content: space-between;
+    background-color: white;
+    align-items: center;
+    margin-left: 30px;
+}
+
+nav button {
+    color:rgb(67, 164, 197);
+    background-color: white;
+    border: 0px;
+    padding: 5px;
+}
+
+nav h2 {
+    font-size: medium;
+    padding: 5px;
+}
+
+nav div {
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
 }
 
 /* Section */
