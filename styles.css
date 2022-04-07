@@ -1,7 +1,7 @@
 * {
     font-family: 'Roboto', sans-serif;
     background-color: #f2f2f2;
-    /* border: 1px solid black; */
+    border: 1px solid black;
 }
 
 /* Nav Bar */
@@ -10,7 +10,13 @@ nav {
     justify-content: space-between;
     background-color: white;
     align-items: center;
-    margin-left: 30px;
+    padding-left: 30px;
+}
+
+nav div {
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
 }
 
 nav button {
@@ -25,11 +31,7 @@ nav h2 {
     padding: 5px;
 }
 
-nav div {
-    display: flex;
-    padding: 10px;
-    flex-direction: row;
-}
+
 
 /* Section */
 section {
@@ -42,6 +44,34 @@ section {
     flex-wrap: wrap;
     justify-content: left;
     width: 70%;
+}
+
+/* Stories Panel */
+.stories-panel {
+    align-self: flex-start;
+    display: flex;
+    width: 100%;
+    background-color: white;
+}
+
+.story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vh;
+    background-color: white;
+    height: 13vh;
+}
+
+.story img {
+    padding: 4px;
+    background-color: lightgray;
+    width: 8vh;
+    border-radius: 50%;
+}
+
+.story p {
+    color: lightgray;
 }
 
 /* Recommendations Panel */
