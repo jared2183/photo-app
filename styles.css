@@ -13,33 +13,39 @@ nav {
     justify-content: space-between;
     background-color: white;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+nav h1 {
     padding-left: 30px;
 }
 
 nav div {
     display: flex;
-    padding: 10px;
     flex-direction: row;
-}
-
-nav button {
-    color:rgb(67, 164, 197);
-    background-color: white;
-    border: 0px;
-    padding: 5px;
 }
 
 nav h2 {
     font-size: medium;
-    padding: 5px;
+    align-self: center;
 }
 
-
+nav button {
+    background-color: white;
+    border: 0px;
+    padding: 20px;
+    font-size: medium;
+    color:rgb(67, 164, 197);
+}
 
 /* Section */
 section {
     display: flex;
     flex-direction: row;
+    margin-top: 80px;
 }
 
 /* Cards */
@@ -55,7 +61,7 @@ section {
 .stories-panel {
     align-self: flex-start;
     display: flex;
-    width: 100%;
+    width: 60%;
     background-color: white;
 }
 
@@ -82,7 +88,7 @@ section {
 /* Cards */
 
 .cards * {
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 /* Card */
