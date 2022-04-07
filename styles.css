@@ -114,6 +114,24 @@ section {
     padding: 1vh;
 }
 
+.card-desc {
+    padding-bottom: 1vh;
+}
+
+.card-desc * {
+    display: inline;
+    font-size: medium;
+}
+
+.card-comment {
+    padding-top: 1vh;
+}
+
+.card-comment * {
+    display: inline;
+    font-size: medium;
+}
+
 .card-buttons {
     display: flex;
     flex-direction: row;
@@ -126,8 +144,21 @@ section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-left: 1vh;
-    padding-right: 1vh;
+    align-items: center;
+    font-size: larger;
+    padding: 1vh;
+    gap: 1vh;
+}
+
+.card-footer input {
+    width: 100%;
+    border-style: none;
+}
+
+.card-footer button {
+    background: none;
+    border: none;
+    color: #0066ff;
 }
 
 /* Recommendations Panel */
