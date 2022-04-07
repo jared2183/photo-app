@@ -1,4 +1,19 @@
+/* Nav Bar */
+
 nav {
     display: flex; 
     justify-content: space-between;
+    background-color: white;
+    align-self: flex-start;
+}
+
+nav button {
+    color:lightblue;
+    background-color: white;
+    border: 0px;
+}
+
+nav div {
+    display: flex;
+    padding: 10px;
 }
