@@ -1,7 +1,10 @@
 * {
     font-family: 'Roboto', sans-serif;
-    background-color: #f2f2f2;
     /* border: 1px solid black; */
+}
+
+body {
+    background-color: #f2f2f2;
 }
 
 /* Nav Bar */
@@ -50,9 +53,15 @@ section {
     border: 1px solid black;
 }
 
+/* Card */
+
 .card {
     width: 60%;
-    background-color: white;
+    background-color: #fff;
+}
+
+.card img {
+    width: 100%;
 }
 
 .card-header {
@@ -63,8 +72,28 @@ section {
     padding-right: 1vh;
 }
 
-.card-body img {
-    width: 100%;
+.card-body {
+    padding: 1vh;
+}
+
+.card-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: xx-large;
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 1vh;
+    padding-right: 1vh;
+}
+
+.card-footer {
+
 }
 
 /* Recommendations Panel */
