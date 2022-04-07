@@ -1,5 +1,6 @@
 * {
     font-family: 'Roboto', sans-serif;
+    background-color: #f2f2f2;
     /* border: 1px solid black; */
 }
 
@@ -28,6 +29,19 @@ nav div {
     display: flex;
     padding: 10px;
     flex-direction: row;
+}
+
+/* Section */
+section {
+    display: flex;
+    flex-direction: row;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    width: 70%;
 }
 
 /* Recommendations Panel */
