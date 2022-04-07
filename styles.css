@@ -15,11 +15,34 @@ section {
     flex-direction: row;
 }
 
+/* Cards */
+
 .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: right;
     width: 70%;
+}
+
+.cards * {
+    border: 1px solid black;
+}
+
+.card {
+    width: 60%;
+    background-color: white;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 1vh;
+    padding-right: 1vh;
+}
+
+.card-body img {
+    width: 100%;
 }
 
 /* Recommendations Panel */
