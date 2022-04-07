@@ -108,6 +108,13 @@ section {
     padding: 1vh;
 }
 
+.card-body h4 {
+    font-size: medium;
+    margin-top: 1vh;
+    margin-bottom: 0vh;
+    color: gray;
+}
+
 .card-desc {
     padding-bottom: 1vh;
 }
