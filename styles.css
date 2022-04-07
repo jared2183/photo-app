@@ -4,6 +4,10 @@
     border: 1px solid black;
 }
 
+body {
+    background-color: #f2f2f2;
+}
+
 /* Nav Bar */
 nav {
     display: flex; 
@@ -39,10 +43,12 @@ section {
     flex-direction: row;
 }
 
+/* Cards */
+
 .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: right;
     width: 70%;
 }
 
@@ -72,6 +78,51 @@ section {
 
 .story p {
     color: lightgray;
+.cards * {
+    border: 1px solid black;
+}
+
+/* Card */
+
+.card {
+    width: 60%;
+    background-color: #fff;
+}
+
+.card img {
+    width: 100%;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 1vh;
+    padding-right: 1vh;
+}
+
+.card-body {
+    padding: 1vh;
+}
+
+.card-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: xx-large;
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 1vh;
+    padding-right: 1vh;
+}
+
+.card-footer {
+
 }
 
 /* Recommendations Panel */
