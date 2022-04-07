@@ -1,7 +1,7 @@
 * {
     font-family: 'Roboto', sans-serif;
     background-color: #f2f2f2;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 body {
@@ -78,6 +78,10 @@ section {
 
 .story p {
     color: lightgray;
+}
+
+/* Cards */
+
 .cards * {
     border: 1px solid black;
 }
@@ -119,10 +123,6 @@ section {
     justify-content: space-between;
     padding-left: 1vh;
     padding-right: 1vh;
-}
-
-.card-footer {
-
 }
 
 /* Recommendations Panel */
