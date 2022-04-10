@@ -3,8 +3,18 @@
     /* border: 1px solid black; */
 }
 
+h1 {
+    font-family: 'Comfortaa';
+}
+
 body {
     background-color: #f2f2f2;
+}
+
+button {
+    border: none;
+    background: none;
+    color: #0095f6;
 }
 
 /* Nav Bar */
@@ -17,10 +27,9 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-}
-
-nav h1 {
-    padding-left: 30px;
+    z-index: 1;
+    height: 60px;
+    border-bottom: 1px solid lightgray;
 }
 
 nav div {
@@ -28,17 +37,17 @@ nav div {
     flex-direction: row;
 }
 
+nav div * {
+    padding-right: 20px;
+}
+
+nav h1 {
+    padding-left: 30px;
+}
+
 nav h2 {
     font-size: medium;
     align-self: center;
-}
-
-nav button {
-    background-color: white;
-    border: 0px;
-    padding: 20px;
-    font-size: medium;
-    color:rgb(67, 164, 197);
 }
 
 /* Section */
@@ -63,6 +72,8 @@ section {
     display: flex;
     width: 60%;
     background-color: white;
+    margin-bottom: 2vh;
+    border: 1px solid lightgray;
 }
 
 .story {
@@ -70,25 +81,21 @@ section {
     flex-direction: column;
     align-items: center;
     padding: 2vh;
+    padding-right: 0vh;
     background-color: white;
-    height: 13vh;
+    height: 10vh;
 }
 
 .story img {
-    padding: 4px;
+    padding: 3px;
     background-color: lightgray;
-    width: 8vh;
+    width: 6vh;
     border-radius: 50%;
 }
 
 .story p {
-    color: lightgray;
-}
-
-/* Cards */
-
-.cards * {
-    /* border: 1px solid black; */
+    color: gray;
+    font-size: small;
 }
 
 /* Card */
@@ -96,6 +103,8 @@ section {
 .card {
     width: 60%;
     background-color: #fff;
+    margin-bottom: 3vh;
+    border: 1px solid lightgray;
 }
 
 .card img {
@@ -106,18 +115,30 @@ section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-left: 1vh;
-    padding-right: 1vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+}
+
+.card-header h1 {
+    font-size: x-large;
 }
 
 .card-body {
-    padding: 1vh;
+    padding: 2vh;
+}
+
+.card-body h2 {
+    font-size: medium;
 }
 
 .card-body h4 {
-    font-size: medium;
+    font-size: small;
     margin-top: 1vh;
     margin-bottom: 0vh;
+    color: gray;
+}
+
+.card-body button {
     color: gray;
 }
 
@@ -144,7 +165,11 @@ section {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    font-size: xx-large;
+    font-size: x-large;
+}
+
+.card-left-buttons * {
+    padding-right: 6px;
 }
 
 .card-footer {
@@ -153,7 +178,8 @@ section {
     justify-content: space-between;
     align-items: center;
     font-size: larger;
-    padding: 1vh;
+    padding: 2vh;
+    padding-top: 0vh;
     gap: 1vh;
 }
 
@@ -162,24 +188,22 @@ section {
     border-style: none;
 }
 
-.card-footer button {
-    background: none;
-    border: none;
-    color: #0066ff;
-}
-
 /* Recommendations Panel */
 .rec {
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    width: 300px;
+    padding: 20px;
+    /* width: 300px; */
+    width: 16%;
     background-color: #f2f2f2;
+    position: fixed;
+    right: 11%;
 }
 
 .rec img {
     border-radius: 50%;
     margin-left: 1vh;
+    width: 7vh;
 }
 
 .rec .user {
@@ -191,13 +215,16 @@ section {
 
 .rec .user h1 {
     margin-left: 2vh;
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 .rec-body h2 {
     padding-left: 1vh;
     padding-block: 0.5vh;
     margin-block: 0px;
+    font-size: large;
+    padding-top: 15px;
+    color: gray;
 }
 
 .rec-el {
@@ -222,4 +249,19 @@ section {
 
 .rec-el h2 {
     font-size: xx-large;
+}
+
+.rec-el p {
+    color: gray;
+}
+
+@media only screen and (max-width: 600px) {
+    .rec {
+        display: none;
+    }
+    .cards {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
 }
