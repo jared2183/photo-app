@@ -74,6 +74,7 @@ section {
     background-color: white;
     margin-bottom: 2vh;
     border: 1px solid lightgray;
+    height: 14vh;
 }
 
 .story {
@@ -83,7 +84,7 @@ section {
     padding: 2vh;
     padding-right: 0vh;
     background-color: white;
-    height: 10vh;
+    /* width: 8vh; */
 }
 
 .story img {
@@ -265,6 +266,10 @@ section {
         width: 100%;
     }
     .card {
-        width: 90%;
+        width: 95%;
+    }
+    .stories-panel {
+        justify-content: center;
+        width: 95%;
     }
 }
