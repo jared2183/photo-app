@@ -161,6 +161,11 @@ section {
     font-size: medium;
 }
 
+.card-comment-list button{
+    font-size: medium;
+    padding-left: 0px;
+}
+
 .card-buttons {
     display: flex;
     flex-direction: row;
