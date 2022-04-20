@@ -1,54 +1,22 @@
 <div class="rec">
     <div class="user">
-        <img src="https://picsum.photos/seed/gibsonjack/80">
+        <img src="{{user.profile_url}}">
         <h1>{{user.username}}</h1>
     </div>
 
     <div class="rec-body">
         <h2>Suggestions for you</h2>
+
+        {% for suggestion in suggestions %}
         <div class="rec-el">
-            <img src="https://picsum.photos/seed/amandahudson/40">
+            <img src="{{suggestion.profile_url}}">
             <div>
-                <h3>amandahudson</h3>
+                <h3>{{suggestion.username}}</h3>
                 <p>suggested for you</p>
             </div>
             <button href="#">follow</button>
         </div>
 
-        <div class="rec-el">
-            <img src="https://picsum.photos/seed/qthornton/40">
-            <div>
-                <h3>qthornton</h3>
-                <p>suggested for you</p>
-            </div>
-            <button href="#">follow</button>
-        </div>
-
-        <div class="rec-el">
-            <img src="https://picsum.photos/seed/ynelson/40">
-            <div>
-                <h3>ynelson</h3>
-                <p>suggested for you</p>
-            </div>
-            <button href="#">follow</button>
-        </div>
-
-        <div class="rec-el">
-            <img src="https://picsum.photos/seed/lauralyons/40">
-            <div>
-                <h3>lauralyons</h3>
-                <p>suggested for you</p>
-            </div>
-            <button href="#">follow</button>
-        </div>
-
-        <div class="rec-el">
-            <img src="https://picsum.photos/seed/robertsonkristen/40">
-            <div>
-                <h3>robertsonkristen</h3>
-                <p>suggested for you</p>
-            </div>
-            <button href="#">follow</button>
-        </div>
+        {% endfor %}
     </div>
 </div>
