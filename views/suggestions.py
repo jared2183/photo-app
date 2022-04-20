@@ -1,7 +1,7 @@
 from flask import Response, request
 from flask_restful import Resource
 from models import User
-from . import get_authorized_user_ids
+from views import get_authorized_user_ids
 import json
 
 class SuggestionsListEndpoint(Resource):
@@ -10,7 +10,8 @@ class SuggestionsListEndpoint(Resource):
         self.current_user = current_user
     
     def get(self):
-        # Your code here:
+        # suggestions should be any user with an ID that's not in this list:
+        # print(get_authorized_user_ids(self.current_user))
         return Response(json.dumps([]), mimetype="application/json", status=200)
 
 

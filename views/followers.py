@@ -11,7 +11,10 @@ class FollowerListEndpoint(Resource):
         self.current_user = current_user
     
     def get(self):
-        # Your code here
+        '''
+        People who are following the current user.
+        In other words, select user_id where following_id = current_user.id
+        '''
         return Response(json.dumps([]), mimetype="application/json", status=200)
 
 

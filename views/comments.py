@@ -1,6 +1,5 @@
 from flask import Response, request
 from flask_restful import Resource
-from . import can_view_post
 import json
 from models import db, Comment, Post
 
@@ -10,7 +9,9 @@ class CommentListEndpoint(Resource):
         self.current_user = current_user
     
     def post(self):
-        # Your code here
+        # create a new "Comment" based on the data posted in the body 
+        body = request.get_json()
+        print(body)
         return Response(json.dumps({}), mimetype="application/json", status=201)
         
 class CommentDetailEndpoint(Resource):
@@ -19,7 +20,8 @@ class CommentDetailEndpoint(Resource):
         self.current_user = current_user
   
     def delete(self, id):
-        # Your code here
+        # delete "Comment" record where "id"=id
+        print(id)
         return Response(json.dumps({}), mimetype="application/json", status=200)
 
 
@@ -33,7 +35,7 @@ def initialize_routes(api):
     )
     api.add_resource(
         CommentDetailEndpoint, 
-        '/api/comments/<id>', 
-        '/api/comments/<id>',
+        '/api/comments/<int:id>', 
+        '/api/comments/<int:id>/',
         resource_class_kwargs={'current_user': api.app.current_user}
     )

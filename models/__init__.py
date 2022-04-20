@@ -25,3 +25,4 @@ from .like_post import LikePost
 from .post import Post
 from .story import Story
 from .user import User
+from .api_structure import ApiNavigator
