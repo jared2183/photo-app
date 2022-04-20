@@ -1,6 +1,6 @@
 <div class="rec">
     <div class="user">
-        <img src="{{user.profile_url}}">
+        <img src="{{user.profile_url}}" alt="{{user.username}}'s profile picture">
         <h1>{{user.username}}</h1>
     </div>
 
@@ -9,7 +9,7 @@
 
         {% for suggestion in suggestions %}
         <div class="rec-el">
-            <img src="{{suggestion.profile_url}}">
+            <img src="{{suggestion.profile_url}}" alt="{{suggestion.username}}'s profile picture">
             <div>
                 <h3>{{suggestion.username}}</h3>
                 <p>suggested for you</p>
