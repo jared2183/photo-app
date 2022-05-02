@@ -15,6 +15,7 @@ class SuggestionsListEndpoint(Resource):
         known_users = get_authorized_user_ids(self.current_user)
         suggestions = User.query.filter(User.id.not_in(known_users)).limit(7).all()
         suggestions_json = [suggestion.to_dict() for suggestion in suggestions]
+        
         return Response(json.dumps(suggestions_json), mimetype="application/json", status=200)
 
 
