@@ -34,7 +34,6 @@ class FollowingListEndpoint(Resource):
         if Following.query.filter_by(user_id=self.current_user.id, following_id=id).all():
             return Response(json.dumps({'message': "following already exists"}), mimetype="application/json", status=400)
 
-        # 1. Create:
         new_following = Following(
             user_id=self.current_user.id,
             following_id=id
