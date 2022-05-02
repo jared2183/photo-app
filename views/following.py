@@ -12,7 +12,7 @@ class FollowingListEndpoint(Resource):
     
     def get(self):
         # return all of the "following" records that the current user is following
-        following_list = Following.query.filter(Following.user_id == self.current_user.id).all()
+        following_list = Following.query.filter_by(user_id=self.current_user.id).all()
         following_json = [user.to_dict_following() for user in following_list]
 
         return Response(json.dumps(following_json), mimetype="application/json", status=200)
