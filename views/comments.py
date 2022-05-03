@@ -28,18 +28,14 @@ class CommentListEndpoint(Resource):
         if not body.get('text'):
             return Response(json.dumps({'message': "the comment parameter is empty"}), mimetype="application/json", status=400)
 
-        print("HEWOPEWOIPEWOIPE")
-        print(id, Post.query.get(id).user_id)
-
         # Check if user is authorized to comment
         if not Following.query.filter_by(user_id=self.current_user.id, following_id=Post.query.get(id).user_id).all():
             return Response(json.dumps({'message': "the post_id parameter is invalid"}), mimetype="application/json", status=404)
 
-
         new_comment = Comment(
             user_id=self.current_user.id,
-            post_id=body.get('post_id'),
-            comment=body.get('comment')
+            post_id=id,
+            text=body.get('text')
         )
 
         db.session.add(new_comment)
