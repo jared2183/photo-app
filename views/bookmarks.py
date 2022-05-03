@@ -1,6 +1,6 @@
 from flask import Response, request
 from flask_restful import Resource
-from models import Bookmark, Post, db
+from models import Bookmark, Following, Post, db
 import json
 
 class BookmarksListEndpoint(Resource):
@@ -21,14 +21,21 @@ class BookmarksListEndpoint(Resource):
         body = request.get_json()
         if not body.get('post_id'):
             return Response(json.dumps({'message': "'post_id' is required"}), mimetype="application/json", status=400)
+        
         # Checks to see if bookmark is an int
         try:
             id = int(body.get('post_id'))
         except:
             return Response(json.dumps({'message': "the post_id parameter is invalid"}), mimetype="application/json", status=400)
+        
         # Checks if post_id is valid
         if not Post.query.get(id):
             return Response(json.dumps({'message': "the post_id parameter is invalid"}), mimetype="application/json", status=404)
+
+        # Check if user is authorized to bookmark
+        if not Following.query.filter_by(user_id=self.current_user.id, following_id=Post.query.get(id).user_id).all():
+            return Response(json.dumps({'message': "the post_id parameter is invalid"}), mimetype="application/json", status=404)
+
         # Checks for dupes
         if Bookmark.query.filter_by(user_id=self.current_user.id, post_id=id).all():
             return Response(json.dumps({'message': "bookmark already exists"}), mimetype="application/json", status=400)
