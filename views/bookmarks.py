@@ -1,6 +1,7 @@
 from flask import Response, request
 from flask_restful import Resource
-from models import Bookmark, Following, Post, db
+from models import Bookmark, Post, db
+from views import can_view_post
 import json
 
 class BookmarksListEndpoint(Resource):
@@ -33,7 +34,7 @@ class BookmarksListEndpoint(Resource):
             return Response(json.dumps({'message': "the post_id parameter is invalid"}), mimetype="application/json", status=404)
 
         # Check if user is authorized to bookmark
-        if not Following.query.filter_by(user_id=self.current_user.id, following_id=Post.query.get(id).user_id).all():
+        if not can_view_post(id, self.current_user):
             return Response(json.dumps({'message': "the post_id parameter is invalid"}), mimetype="application/json", status=404)
 
         # Checks for dupes
