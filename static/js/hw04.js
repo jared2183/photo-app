@@ -42,7 +42,7 @@ const createNewFollow = (userId, elem) => {
     fetch('/api/following', {
         method: 'POST',
         headers: {
-            'content-type': 'applications/json'
+            'content-type': 'application/json'
         },
         body: JSON.stringify(postData)
     })
