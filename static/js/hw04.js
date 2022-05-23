@@ -1,3 +1,19 @@
+const getCookie = key => {
+    let name = key + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+};
+
 const story2Html = story => {
     return `
         <div>
@@ -42,7 +58,8 @@ const createNewFollow = (userId, elem) => {
     fetch('/api/following', {
         method: 'POST',
         headers: {
-            'content-type': 'applications/json'
+            'content-type': 'applications/json',
+            'X-CSRF-TOKEN': getCookie('csrf_access_token')
         },
         body: JSON.stringify(postData)
     })
@@ -71,7 +88,13 @@ const deleteFollower = (followerId, elem) => {
 }
 
 const getSuggestion = () => {
-    fetch('/api/suggestions/')
+    fetch('/api/suggestions/', {
+        method: 'GET',
+        headers: {
+            'content-type': 'applications/json',
+            'X-CSRF-TOKEN': getCookie('csrf_access_token')
+        }
+    })
         .then(response => response.json())
         .then(users => {
             // combines all user html files into one variable
@@ -97,3 +120,4 @@ const initPage = () => {
 
 // invoke init page to display stories:
 initPage();
+

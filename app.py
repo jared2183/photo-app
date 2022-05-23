@@ -31,10 +31,6 @@ jwt = flask_jwt_extended.JWTManager(app)
 db.init_app(app)
 api = Api(app)
 
-# TODO: Deprecate old code for hard-coding the logged in user (User #12).
-# with app.app_context():
-#     app.current_user = User.query.filter_by(id=12).one()
-
 # TODO: replace the hard-coded user #12 code (above) with this code, which
 # figures out who is logged into the system based on the JWT.
 @jwt.user_lookup_loader
