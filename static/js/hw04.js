@@ -61,7 +61,7 @@ const deleteFollower = (followerId, elem) => {
     fetch(deleteURL, {
         method: 'DELETE'
     })
-    .then(respone => response.json)
+    .then(respone => response.json())
     .then(data => {
         elem.innerHTML = 'Follow'
         elem.classList.add('Follow')
@@ -72,7 +72,7 @@ const deleteFollower = (followerId, elem) => {
 
 const getSuggestion = () => {
     fetch('/api/suggestions/')
-        .then(response => response.json)
+        .then(response => response.json())
         .then(users => {
             // combines all user html files into one variable
             const html = users.map(user2Html).join('\n');
@@ -92,6 +92,7 @@ const displayStories = () => {
 
 const initPage = () => {
     displayStories();
+    getSuggestion();
 };
 
 // invoke init page to display stories:
