@@ -21,6 +21,7 @@ const user2Html = user => {
 }
 
 const toggleFollow = event => {
+    console.log(event);
     const elem = event.currentTarget;
     const userId = elem.dataset.userId;
 
@@ -30,8 +31,9 @@ const toggleFollow = event => {
     }
     else {
         elem.innerHTML = "Follow"
+        console.log(elem.dataset)
         deleteFollower(elem.dataset.followingId, elem)
-    }
+    }               
 }
 
 const createNewFollow = (userId, elem) => {
@@ -61,7 +63,7 @@ const deleteFollower = (followerId, elem) => {
     fetch(deleteURL, {
         method: 'DELETE'
     })
-    .then(respone => response.json())
+    .then(response => response.json())
     .then(data => {
         elem.innerHTML = 'Follow'
         elem.classList.add('Follow')
