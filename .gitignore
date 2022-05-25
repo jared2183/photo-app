@@ -2,3 +2,4 @@
 env
 .env
 static/.DS_Store
+tests_updated/.DS_Store
