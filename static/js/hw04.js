@@ -9,20 +9,27 @@ const story2Html = story => {
 
 const user2Html = user => {
     return `
-        <div>
+        <section>
             <img src="${user.thumb_url}">
-            <div>
-                <p class="username">${user.username}</p>
-                <p class="suggestion-text">Suggestions for you</p>
-            </div>
-        </div>
-        <button class="Follow" onClick=toggleFollow(event) data-user-id=${user.id}>Follow</button>
+            <p class="username">${user.username}</p>
+            <button class="Follow" onClick=toggleFollow(event) data-user-id=${user.id}>Follow</button>
+        </section>
     `;
 }
 
+const profile2Html = profile => {
+    return `
+        <div>
+            <img src="${profile.thumb_url}">
+            <div>
+                <p class="username">${profile.username}</p>
+            </div>
+        </div>    
+        `;
+}
+// Follow and Unfollow buttons
 const toggleFollow = event => {
-    console.log(event);
-    const elem = event.currentTarget;
+    const elem = event.target;
     const userId = elem.dataset.userId;
 
     if (elem.innerHTML === "Follow") {
@@ -31,9 +38,8 @@ const toggleFollow = event => {
     }
     else {
         elem.innerHTML = "Follow"
-        console.log(elem.dataset)
         deleteFollower(elem.dataset.followingId, elem)
-    }               
+    }
 }
 
 const createNewFollow = (userId, elem) => {
@@ -49,7 +55,7 @@ const createNewFollow = (userId, elem) => {
         body: JSON.stringify(postData)
     })
 
-    .then(response => response.json)
+    .then(response => response.json())
         .then(data => {
             elem.innerHTML = 'Unfollow'
             elem.classList.add('Unfollow')
@@ -72,6 +78,17 @@ const deleteFollower = (followerId, elem) => {
     })
 }
 
+// Suggestions Panel
+const getProfile = () => {
+    fetch('/api/profile/')
+        .then(response => response.json())
+        .then(user => {
+            const html = user2Html(user);
+            document.querySelector('.suggestions').innerHTML = html;
+        })
+}
+
+// 
 const getSuggestion = () => {
     fetch('/api/suggestions/')
         .then(response => response.json())
@@ -82,7 +99,7 @@ const getSuggestion = () => {
         })
 }
 
-// fetch data from your API endpoint:
+// fetch data from your API endpoint for stories:
 const displayStories = () => {
     fetch('/api/stories')
         .then(response => response.json())
