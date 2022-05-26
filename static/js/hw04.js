@@ -41,16 +41,19 @@ const comment2Html = comment => {
 }
 
 
-// Posts 
+// Posts
+
+var posts = {}
 
 const getPosts = () => {
     fetch('/api/posts')
         .then(response => response.json())
-        .then(posts => {
+        .then(postsData => {
             postHTML = ""
             // loop through first 10 posts
-            posts.slice(0, 10).forEach(post => {
+            postsData.slice(0, 10).forEach(post => {
                 postHTML += post2HTML(post)
+                posts[post.id] = post
             });
             document.querySelector('#posts').innerHTML = postHTML;
         })
@@ -67,7 +70,7 @@ const post2HTML = (post) => {
         postHTML += comment2Html(comments[0])
     }
     else if (comments.length > 1) {
-        postHTML += `<button>View all ${comments.length} comments</button>`
+        postHTML += `<button onClick=openModal(${post.id})>View all ${comments.length} comments</button>`
         postHTML += comment2Html(comments[comments.length - 1])
     }
 
@@ -297,6 +300,60 @@ const deleteFollower = (followerId, elem) => {
         elem.setAttribute('aria-checked', 'false')
         elem.setAttribute('data-following-id', data.id)
     })
+}
+
+// Modal
+
+const MODAL_COMMENT_HTML = (comment) => {
+    return `<div class="modal-comment">
+        <div class="modal-comment-left">
+            <img src="${comment.user.thumb_url}">
+        </div>
+
+        <div class="modal-comment-center">
+            <h3 class="modal-comment-author">${comment.user.username}</h3>
+            <p class="modal-comment-text">${comment.text}</p>
+            <br>
+            <h4>${comment.display_time}</h4>
+        </div>
+
+        <div class="modal-comment-right">
+            <i class="far fa-heart"></i>
+        </div>
+    </div>`
+}
+
+function openModal(postID) {
+    document.getElementById('modal').classList.add('modal-visible');
+
+    console.log(postID)
+    console.log(posts[postID])
+
+    const post = posts[postID]
+
+    document.getElementById('modal-img').setAttribute('src', post.image_url)
+    document.getElementById('modal-author').innerHTML = post.user.username
+    document.getElementById('modal-author-img').setAttribute('src', post.user.thumb_url)
+
+    // Reset modal comments
+    document.getElementById('modal-comments').innerHTML = ''
+
+    // Add caption to comments
+    if (post.caption) {
+        const caption = {
+            user: post.user,
+            text: post.caption,
+            display_time: post.display_time
+        }
+
+        document.getElementById('modal-comments').innerHTML += MODAL_COMMENT_HTML(caption)
+    }
+
+    if (post.comments) {
+        post.comments.forEach(comment => {
+            document.getElementById('modal-comments').innerHTML += MODAL_COMMENT_HTML(comment)
+        })
+    }
 }
 
 // Comments
