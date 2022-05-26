@@ -21,20 +21,18 @@ const user2Html = user => {
 
 const profile2Html = profile => {
     return `
-        <div>
+        <div class="user">
             <img src="${profile.thumb_url}">
-            <div>
-                <p class="username">${profile.username}</p>
-            </div>
-        </div>    
-        `;
+            <h1 class="username">${profile.username}</h1>
+        </div>
+        `
 }
 
 // Posts 
 
 const getPosts = () => {
-    console.log("getPosts")
-    console.log("making sure active user is set", activeUser)
+    // console.log("getPosts")
+    // console.log("making sure active user is set", activeUser)
     fetch('/api/posts')
         .then(response => response.json())
         .then(posts => {
@@ -42,7 +40,7 @@ const getPosts = () => {
             // loop through first 10 posts
             posts.slice(0, 10).forEach(post => {
                 post.current_user_like_id = getLikeID(post)
-                console.log(post.current_user_like_id)
+                // console.log(post.current_user_like_id)
                 postHTML += post2Html_Head(post)
 
                 if (post.comments.length > 0) {
@@ -58,7 +56,7 @@ const getPosts = () => {
                 postHTML += "\n"
             });
             
-            console.log('getPosts html', posts)
+            // console.log('getPosts html', posts)
             document.querySelector('#posts').innerHTML = postHTML;
         })
 }
@@ -109,8 +107,8 @@ const post2Html_Footer = post => {
     <form class="card-footer">
         <i class="far fa-smile"></i>
         <input type="text" id="comment" placeholder="Add a comment..." aria-label="Add a comment">
-        <button>Post</button>
     </form>
+    <button class="comment" post_id="${post.id}" onClick=newComment(event)>Post</button>
     </div>
     `
 }
@@ -179,20 +177,19 @@ const toggleLike = event => {
     }
 }
 
-// Follow and Unfollow buttons
+// Follow and Unfollow
+
 const toggleFollow = event => {
     const elem = event.target;
     const userId = elem.dataset.userId;
 
     if (elem.innerHTML === "Follow") {
         elem.innerHTML = "Following..."
-        console.log(elem.dataset)
         createNewFollow(userId, elem)
     } else if (elem.innerHTML === "Unfollow") {
         elem.innerHTML = "Unfollowing..."
-        console.log(elem.dataset)
         deleteFollower(elem.dataset.followingId, elem)
-    }               
+    }
 }
 
 const createNewFollow = (userId, elem) => {
@@ -209,12 +206,12 @@ const createNewFollow = (userId, elem) => {
     })
 
     .then(response => response.json())
-        .then(data => {
-            elem.innerHTML = 'Unfollow'
-            elem.classList.add('Unfollow')
-            elem.classList.remove('Follow')
-            elem.setAttribute('data-following-id', data.id)
-        })
+    .then(data => {
+        elem.innerHTML = 'Unfollow'
+        elem.classList.add('Unfollow')
+        elem.classList.remove('Follow')
+        elem.setAttribute('data-following-id', data.id)
+    })
 }   
 
 const deleteFollower = (followerId, elem) => {
@@ -231,13 +228,42 @@ const deleteFollower = (followerId, elem) => {
     })
 }
 
+// Comments
+
+const newComment = (event) => {
+    const elem = event.target;
+    console.log('elem: ', elem)
+    const postId = elem.getAttribute('post_id');
+    const commentText  = document.getElementById('comment').value;
+    const commentRequest = {
+        'post_id': postId,
+        'text': commentText
+    }
+
+    fetch('/api/comments', {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(commentRequest)
+        })
+    .then(response => response.json())
+    .then(commentData => {
+        console.log('comment data: ', commentData)
+        // const comment = comment2Html(comment_data)
+        // const commentList = document.querySelector(`.card-comment-list[post_id=${postId}]`)
+        // commentList.insertAdjacentHTML('beforeend', comment)
+    })
+}
+
 // Suggestions Panel
+
 const getProfile = () => {
     fetch('/api/profile/')
         .then(response => response.json())
-        .then(user => {
-            const html = user2Html(user);
-            document.querySelector('.suggestions').innerHTML = html;
+        .then(profile => {
+            const html = profile2Html(profile);
+            document.querySelector('.profile').innerHTML = html;
         })
 }
 
@@ -259,7 +285,7 @@ const displayStories = () => {
             const html = stories.map(story2Html).join('\n');
             document.querySelector('.stories').innerHTML = html;
         })
-};
+}
 
 const initPage = () => {
     fetch("http://127.0.0.1:5000/api/profile/", {
@@ -272,6 +298,7 @@ const initPage = () => {
     .then(data => {
         activeUser = data;
         displayStories();
+        getProfile();
         getSuggestion();
         getPosts();
     });
