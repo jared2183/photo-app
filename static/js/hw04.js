@@ -73,7 +73,7 @@ const post2HTML = (post) => {
 
     postHTML += post2Html_Footer(post)
     postHTML += "\n"
-    console.log('post html: ', postHTML)
+    // console.log('post html: ', postHTML)
     return postHTML
 }
 
