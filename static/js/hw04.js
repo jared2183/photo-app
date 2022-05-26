@@ -14,7 +14,7 @@ const user2Html = user => {
         <section>
             <img src="${user.thumb_url}">
             <p class="username">${user.username}</p>
-            <button class="Follow" onClick=toggleFollow(event) data-user-id=${user.id}>Follow</button>
+            <button aria-label="Follow button" aria-checked="false" class="Follow" onClick=toggleFollow(event) data-user-id=${user.id}>Follow</button>
         </section>
     `;
 }
@@ -87,12 +87,12 @@ const post2Html_Head = post => {
         <div class="card-body">
             <div class="card-buttons">
                 <div class="card-left-buttons">
-                    <button class="${post.current_user_like_id ? "fas liked" : "far"} fa-heart" current_user_like_id="${post.current_user_like_id}" onClick=toggleLike(event)></button>
+                    <button aria-checked="${post.current_user_like_id != '0'}" aria-label="Like button" class="${post.current_user_like_id ? "fas liked" : "far"} fa-heart" current_user_like_id="${post.current_user_like_id}" onClick=toggleLike(event)></button>
                     <button class="far fa-comment"></button>
                     <button class="far fa-paper-plane"></button>
                 </div>
                 <div>
-                    <button class="${post.current_user_bookmark_id ? "fas" : "far"} fa-bookmark" current_user_bookmark_id="${post.current_user_bookmark_id ? post.current_user_bookmark_id : 0}" onClick=toggleBookmark(event)></button>
+                    <button aria-checked="${post.current_user_bookmark_id != '0'}" aria-label="Bookmark button" class="${post.current_user_bookmark_id ? "fas" : "far"} fa-bookmark" current_user_bookmark_id="${post.current_user_bookmark_id ? post.current_user_bookmark_id : 0}" onClick=toggleBookmark(event)></button>
                 </div>
             </div>
             <h2 id="likes">${post.likes.length} likes</h2>
@@ -152,6 +152,8 @@ const toggleLike = event => {
                     event.target.classList.add('far')
                     event.target.setAttribute('current_user_like_id', '0')
 
+                    event.target.setAttribute('aria-checked', 'false')
+
                     oldLikes = event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML
                     oldLikes = parseInt(oldLikes.split(' ')[0]) - 1
                     event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML = oldLikes + " like" + (oldLikes == 1 ? "" : "s")
@@ -181,7 +183,8 @@ const toggleLike = event => {
                         event.target.classList.remove('far')
                         event.target.setAttribute('current_user_like_id', dataJSON.id)
 
-                        // console.log("innyhtmley", event.target.parentElement.parentElement.parentElement)
+                        event.target.setAttribute('aria-checked', 'true')
+
                         oldLikes = event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML
                         oldLikes = parseInt(oldLikes.split(' ')[0]) + 1
                         event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML = oldLikes + " like" + (oldLikes == 1 ? "" : "s")
@@ -211,6 +214,8 @@ function toggleBookmark(event) {
                 event.target.classList.remove('fas')
                 event.target.classList.add('far')
                 event.target.setAttribute('current_user_bookmark_id', '0')
+
+                event.target.setAttribute('aria-checked', 'false')
             } else {
                 console.error(response)
             }
@@ -233,6 +238,8 @@ function toggleBookmark(event) {
                     event.target.classList.add('fas')
                     event.target.classList.remove('far')
                     event.target.setAttribute('current_user_bookmark_id', data.id)
+
+                    event.target.setAttribute('aria-checked', 'true')
 
                     bookmarks[postID] = data.id
                 })
@@ -272,12 +279,13 @@ const createNewFollow = (userId, elem) => {
     })
 
     .then(response => response.json())
-    .then(data => {
-        elem.innerHTML = 'Unfollow'
-        elem.classList.add('Unfollow')
-        elem.classList.remove('Follow')
-        elem.setAttribute('data-following-id', data.id)
-    })
+        .then(data => {
+            elem.innerHTML = 'Unfollow'
+            elem.classList.add('Unfollow')
+            elem.classList.remove('Follow')
+            elem.setAttribute('aria-checked', 'true')
+            elem.setAttribute('data-following-id', data.id)
+        })
 }   
 
 const deleteFollower = (followerId, elem) => {
@@ -290,6 +298,7 @@ const deleteFollower = (followerId, elem) => {
         elem.innerHTML = 'Follow'
         elem.classList.add('Follow')
         elem.classList.remove('Unfollow')
+        elem.setAttribute('aria-checked', 'false')
         elem.setAttribute('data-following-id', data.id)
     })
 }
