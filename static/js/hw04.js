@@ -40,7 +40,7 @@ const getPosts = () => {
             // loop through first 10 posts
             posts.slice(0, 10).forEach(post => {
                 post.current_user_like_id = getLikeID(post)
-                // console.log(post.current_user_like_id)
+                post.current_user_bookmark_id = bookmarks[post.id]
                 postHTML += post2Html_Head(post)
 
                 if (post.comments.length > 0) {
@@ -77,10 +77,10 @@ const post2Html_Head = post => {
                     <button class="far fa-paper-plane"></button>
                 </div>
                 <div>
-                    <i class="far fa-bookmark"></i>
+                    <button class="${post.current_user_bookmark_id ? "fas" : "far"} fa-bookmark" current_user_bookmark_id="${post.current_user_bookmark_id ? post.current_user_bookmark_id : 0}" onClick=toggleBookmark(event)></button>
                 </div>
             </div>
-            <h2>${post.likes.length} likes</h2>
+            <h2 id="likes">${post.likes.length} likes</h2>
             <div class="card-desc">
                 <h3>${post.user.username}</h3>
                 <p>${post.caption}</p>
@@ -144,6 +144,10 @@ const toggleLike = event => {
                     event.target.classList.remove('liked')
                     event.target.classList.add('far')
                     event.target.setAttribute('current_user_like_id', '0')
+
+                    oldLikes = event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML
+                    oldLikes = parseInt(oldLikes.split(' ')[0]) - 1
+                    event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML = oldLikes + " like" + (oldLikes == 1 ? "" : "s")
                 } else {
                     console.log(dataJSON)
                 }
@@ -169,11 +173,66 @@ const toggleLike = event => {
                         event.target.classList.add('fas')
                         event.target.classList.remove('far')
                         event.target.setAttribute('current_user_like_id', dataJSON.id)
+
+                        console.log("innyhtmley", event.target.parentElement.parentElement.parentElement)
+                        oldLikes = event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML
+                        oldLikes = parseInt(oldLikes.split(' ')[0]) + 1
+                        event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML = oldLikes + " like" + (oldLikes == 1 ? "" : "s")
                     } else {
                         console.log(dataJSON)
                     }
                 })
             });
+    }
+}
+
+function toggleBookmark(event) {
+    bookmarkID = event.target.getAttribute('current_user_bookmark_id');
+    postID = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('post_id');
+
+    console.log("toggleBookmark postID", postID)
+
+    if (bookmarkID != '0') { // Remove bookmark
+        fetch("http://127.0.0.1:5000/api/bookmarks/" + bookmarkID, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                event.target.classList.remove('fas')
+                event.target.classList.add('far')
+                event.target.setAttribute('current_user_bookmark_id', '0')
+            } else {
+                console.error(response)
+            }
+        });
+    } else { // Add bookmark
+        const postData = {
+            "post_id": postID
+        };
+        
+        fetch("http://127.0.0.1:5000/api/bookmarks/", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData)
+        })
+        .then(response => {
+            if (response.ok) {
+                response.json().then(data => {
+                    event.target.classList.add('fas')
+                    event.target.classList.remove('far')
+                    event.target.setAttribute('current_user_bookmark_id', data.id)
+
+                    bookmarks[postID] = data.id
+                })
+            } else {
+                console.error(response)
+            }
+        });
     }
 }
 
@@ -287,6 +346,8 @@ const displayStories = () => {
         })
 }
 
+var bookmarks = {}
+
 const initPage = () => {
     fetch("http://127.0.0.1:5000/api/profile/", {
         method: "GET",
@@ -296,12 +357,27 @@ const initPage = () => {
     })
     .then(response => response.json())
     .then(data => {
-        activeUser = data;
-        displayStories();
-        getProfile();
-        getSuggestion();
-        getPosts();
-    });
+        activeUser = data;)
+
+    fetch("http://127.0.0.1:5000/api/bookmarks/", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(bookmarks_response => bookmarks_response.json())
+    .then(bookmarks_data => {
+        console.log("bookymarkies", bookmarks_data);
+
+        for (let i = 0; i < bookmarks_data.length; i++) {
+            bookmarks[bookmarks_data[i].post.id] = bookmarks_data[i].id
+        }
+        console.log("bookymen!", bookmarks)})
+        
+    displayStories();
+    getProfile();
+    getSuggestion();
+    getPosts();
 };
 
 // invoke init page to display stories:
