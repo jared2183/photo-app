@@ -136,8 +136,6 @@ const toggleLike = event => {
     likeID = event.target.getAttribute('current_user_like_id');
     postID = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('post_id');
 
-    console.log(postID)
-
     if (likeID != '0') { // Remove like
         fetch("http://127.0.0.1:5000/api/posts/likes/" + likeID, {
             method: "DELETE",
@@ -148,7 +146,6 @@ const toggleLike = event => {
         .then(data => {
             data.json().then(dataJSON => {
                 if (data.ok) {
-                    // console.log("databoy", dataJSON)
                     event.target.classList.remove('fas')
                     event.target.classList.remove('liked')
                     event.target.classList.add('far')
@@ -160,7 +157,7 @@ const toggleLike = event => {
                     oldLikes = parseInt(oldLikes.split(' ')[0]) - 1
                     event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML = oldLikes + " like" + (oldLikes == 1 ? "" : "s")
                 } else {
-                    // console.log(dataJSON)
+                    console.error(dataJSON)
                 }
             })
         });
@@ -179,7 +176,6 @@ const toggleLike = event => {
             .then(data => {
                 data.json().then(dataJSON => {
                     if (data.ok) {
-                        // console.log("databoy", dataJSON)
                         event.target.classList.add('liked')
                         event.target.classList.add('fas')
                         event.target.classList.remove('far')
@@ -191,7 +187,7 @@ const toggleLike = event => {
                         oldLikes = parseInt(oldLikes.split(' ')[0]) + 1
                         event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML = oldLikes + " like" + (oldLikes == 1 ? "" : "s")
                     } else {
-                        console.log(dataJSON)
+                        console.error(dataJSON)
                     }
                 })
             });
@@ -201,8 +197,6 @@ const toggleLike = event => {
 function toggleBookmark(event) {
     bookmarkID = event.target.getAttribute('current_user_bookmark_id');
     postID = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('post_id');
-
-    // console.log("toggleBookmark postID", postID)
 
     if (bookmarkID != '0') { // Remove bookmark
         fetch("http://127.0.0.1:5000/api/bookmarks/" + bookmarkID, {
