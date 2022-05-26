@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="/static/css/starter-client.css">
     <link rel="stylesheet" href="/static/css/card.css">
+    <link rel="stylesheet" href="/static/css/modal.css">
 
     <!-- client-side scripts -->
     <script lang="text/javascript" src="/static/js/hw04.js" defer></script>
@@ -36,6 +37,69 @@
         </div>
 
     </main>
+
+    <div class="modal modal-visible">
+        <!-- Modal rendered client-side -->
+        <button onclick="event.target.parentElement.classList.remove('modal-visible')">X</button>
+        <div class="modal-content">
+            <div class="modal-image">
+                <img src="https://picsum.photos/400" alt="">
+            </div>
+            <div class="modal-body">
+                <div class="modal-header">
+                    <img src="https://picsum.photos/100" alt="">
+                    <h1 class="modal-title">luke_brown</h1>
+                </div>
+
+                <div class="modal-comments">
+                    <div class="modal-comment">
+                        <div class="modal-comment-left">
+                            <img src="https://picsum.photos/50" alt="">
+                        </div>
+
+                        <div class="modal-comment-center">
+                            <h3 class="modal-comment-author">luke_brown</h3>
+                            <p class="modal-comment-text">Lorem ipsum dolor sit amet consectetur adipsicing elit. Lorem ipsum dolor sit amet consectetur adipsicing elit. Lorem ipsum dolor sit amet consectetur adipsicing elit.</p>
+                        </div>
+
+                        <div class="modal-comment-right">
+                            <i class="far fa-heart"></i>
+                        </div>
+                    </div>
+
+                    <div class="modal-comment">
+                        <div class="modal-comment-left">
+                            <img src="https://picsum.photos/50" alt="">
+                        </div>
+
+                        <div class="modal-comment-center">
+                            <h3 class="modal-comment-author">luke_brown_pants</h3>
+                            <p class="modal-comment-text">What the fuck did you just say about me you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can...</p>
+                        </div>
+
+                        <div class="modal-comment-right">
+                            <i class="far fa-heart"></i>
+                        </div>
+                    </div>
+
+                    <div class="modal-comment">
+                        <div class="modal-comment-left">
+                            <img src="https://picsum.photos/50" alt="">
+                        </div>
+
+                        <div class="modal-comment-center">
+                            <h3 class="modal-comment-author">luke_brown_pants</h3>
+                            <p class="modal-comment-text">What the fuck did you just say about me you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can...</p>
+                        </div>
+
+                        <div class="modal-comment-right">
+                            <i class="far fa-heart"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
