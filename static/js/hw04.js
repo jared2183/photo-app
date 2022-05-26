@@ -82,7 +82,7 @@ const post2Html_Head = post => {
                     <button class="${post.current_user_bookmark_id ? "fas" : "far"} fa-bookmark" current_user_bookmark_id="${post.current_user_bookmark_id ? post.current_user_bookmark_id : 0}" onClick=toggleBookmark(event)></button>
                 </div>
             </div>
-            <h2>${post.likes.length} likes</h2>
+            <h2 id="likes">${post.likes.length} likes</h2>
             <div class="card-desc">
                 <h3>${post.user.username}</h3>
                 <p>${post.caption}</p>
@@ -146,6 +146,10 @@ const toggleLike = event => {
                     event.target.classList.remove('liked')
                     event.target.classList.add('far')
                     event.target.setAttribute('current_user_like_id', '0')
+
+                    oldLikes = event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML
+                    oldLikes = parseInt(oldLikes.split(' ')[0]) - 1
+                    event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML = oldLikes + " like" + (oldLikes == 1 ? "" : "s")
                 } else {
                     console.log(dataJSON)
                 }
@@ -171,6 +175,11 @@ const toggleLike = event => {
                         event.target.classList.add('fas')
                         event.target.classList.remove('far')
                         event.target.setAttribute('current_user_like_id', dataJSON.id)
+
+                        console.log("innyhtmley", event.target.parentElement.parentElement.parentElement)
+                        oldLikes = event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML
+                        oldLikes = parseInt(oldLikes.split(' ')[0]) + 1
+                        event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML = oldLikes + " like" + (oldLikes == 1 ? "" : "s")
                     } else {
                         console.log(dataJSON)
                     }
