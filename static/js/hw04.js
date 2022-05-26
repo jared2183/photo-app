@@ -111,11 +111,13 @@ const post2Html_Head = post => {
 
 const post2Html_Footer = post => {
     return `
+        </div>
         <div class="card-footer">
             <i class="far fa-smile"></i>
             <input type="text" id="comment" placeholder="Add a comment..." aria-label="Add a comment">
             <button class="comment" post_id="${post.id}" onClick=newComment(event)>Post</button>
         </div>
+    </div>
     </div>
     `
 }
