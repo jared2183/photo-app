@@ -28,42 +28,57 @@ const profile2Html = profile => {
         `
 }
 
+const comment2Html = comment => {
+    return `
+    <div class="card-comment">
+        <h3>${comment.user.username}</h3>
+        <p>${comment.text}</p>
+    </div>
+    <div class="timestamp">
+        <h4>${comment.display_time}</h4>
+    </div>
+    `
+}
+
+
 // Posts 
 
 const getPosts = () => {
-    // console.log("getPosts")
-    // console.log("making sure active user is set", activeUser)
     fetch('/api/posts')
         .then(response => response.json())
         .then(posts => {
             postHTML = ""
             // loop through first 10 posts
             posts.slice(0, 10).forEach(post => {
-                post.current_user_like_id = getLikeID(post)
-                post.current_user_bookmark_id = bookmarks[post.id]
-                postHTML += post2Html_Head(post)
-
-                if (post.comments.length > 0) {
-                    postHTML += post2Html_Comment(post.comments[0])
-                }
-
-                if (post.comments.length > 1) {
-                    postHTML += `<button>View all ${post.comments.length} comments</button>`
-                }
-
-                postHTML += post2Html_Footer(post)
-
-                postHTML += "\n"
+                postHTML += post2HTML(post)
             });
-            
-            // console.log('getPosts html', posts)
             document.querySelector('#posts').innerHTML = postHTML;
         })
 }
 
+const post2HTML = (post) => {
+    postHTML = ''
+    post.current_user_like_id = getLikeID(post)
+    post.current_user_bookmark_id = bookmarks[post.id]
+    postHTML += post2Html_Head(post)
+    comments = post.comments
+
+    if (comments.length === 1) {
+        postHTML += comment2Html(comments[0])
+    }
+    else if (comments.length > 1) {
+        postHTML += `<button>View all ${comments.length} comments</button>`
+        postHTML += comment2Html(comments[comments.length - 1])
+    }
+
+    postHTML += post2Html_Footer(post)
+    postHTML += "\n"
+    return postHTML
+}
+
 const post2Html_Head = post => {
     return `
-    <div class="card" post_id=${post.id}>
+    <div class="card" id="post-${post.id}" post_id=${post.id}>
         <div class="card-header">
             <h1>${post.user.username}</h1>
             <h1>···</h1>
@@ -85,30 +100,22 @@ const post2Html_Head = post => {
                 <h3>${post.user.username}</h3>
                 <p>${post.caption}</p>
                 <button>more</button>
+            </div>                
+            <div class="timestamp">
+                <h4>${post.display_time}</h4>
             </div>
             <div class="card-comment-list">
     `
 }
 
-const post2Html_Comment = comment => {
-    return `
-    <div class="card-comment">
-        <h3>${comment.user.username}</h3>
-        <p>${comment.text}</p>
-    </div>
-    `
-}
 
 const post2Html_Footer = post => {
     return `
-    </div>
-        <h4>${post.display_time}</h4>
-    </div>
-    <form class="card-footer">
-        <i class="far fa-smile"></i>
-        <input type="text" id="comment" placeholder="Add a comment..." aria-label="Add a comment">
-    </form>
-    <button class="comment" post_id="${post.id}" onClick=newComment(event)>Post</button>
+        <div class="card-footer">
+            <i class="far fa-smile"></i>
+            <input type="text" id="comment" placeholder="Add a comment..." aria-label="Add a comment">
+            <button class="comment" post_id="${post.id}" onClick=newComment(event)>Post</button>
+        </div>
     </div>
     `
 }
@@ -127,7 +134,7 @@ const toggleLike = event => {
     likeID = event.target.getAttribute('current_user_like_id');
     postID = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('post_id');
 
-    // console.log(postID)
+    console.log(postID)
 
     if (likeID != '0') { // Remove like
         fetch("http://127.0.0.1:5000/api/posts/likes/" + likeID, {
@@ -139,7 +146,7 @@ const toggleLike = event => {
         .then(data => {
             data.json().then(dataJSON => {
                 if (data.ok) {
-                    console.log("databoy", dataJSON)
+                    // console.log("databoy", dataJSON)
                     event.target.classList.remove('fas')
                     event.target.classList.remove('liked')
                     event.target.classList.add('far')
@@ -149,7 +156,7 @@ const toggleLike = event => {
                     oldLikes = parseInt(oldLikes.split(' ')[0]) - 1
                     event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML = oldLikes + " like" + (oldLikes == 1 ? "" : "s")
                 } else {
-                    console.log(dataJSON)
+                    // console.log(dataJSON)
                 }
             })
         });
@@ -168,13 +175,13 @@ const toggleLike = event => {
             .then(data => {
                 data.json().then(dataJSON => {
                     if (data.ok) {
-                        console.log("databoy", dataJSON)
+                        // console.log("databoy", dataJSON)
                         event.target.classList.add('liked')
                         event.target.classList.add('fas')
                         event.target.classList.remove('far')
                         event.target.setAttribute('current_user_like_id', dataJSON.id)
 
-                        console.log("innyhtmley", event.target.parentElement.parentElement.parentElement)
+                        // console.log("innyhtmley", event.target.parentElement.parentElement.parentElement)
                         oldLikes = event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML
                         oldLikes = parseInt(oldLikes.split(' ')[0]) + 1
                         event.target.parentElement.parentElement.parentElement.querySelector("#likes").innerHTML = oldLikes + " like" + (oldLikes == 1 ? "" : "s")
@@ -190,7 +197,7 @@ function toggleBookmark(event) {
     bookmarkID = event.target.getAttribute('current_user_bookmark_id');
     postID = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('post_id');
 
-    console.log("toggleBookmark postID", postID)
+    // console.log("toggleBookmark postID", postID)
 
     if (bookmarkID != '0') { // Remove bookmark
         fetch("http://127.0.0.1:5000/api/bookmarks/" + bookmarkID, {
@@ -291,9 +298,9 @@ const deleteFollower = (followerId, elem) => {
 
 const newComment = (event) => {
     const elem = event.target;
-    console.log('elem: ', elem)
+    const parentElem = elem.parentElement
     const postId = elem.getAttribute('post_id');
-    const commentText  = document.getElementById('comment').value;
+    const commentText  = parentElem.querySelector('#comment').value;
     const commentRequest = {
         'post_id': postId,
         'text': commentText
@@ -306,12 +313,22 @@ const newComment = (event) => {
         },
         body: JSON.stringify(commentRequest)
         })
-    .then(response => response.json())
-    .then(commentData => {
-        console.log('comment data: ', commentData)
-        // const comment = comment2Html(comment_data)
-        // const commentList = document.querySelector(`.card-comment-list[post_id=${postId}]`)
-        // commentList.insertAdjacentHTML('beforeend', comment)
+    .then(data => {
+        if (!data.ok) {
+            console.error(data)
+        }
+
+        parentElem.querySelector('#comment').value = ''
+        const postURL = `/api/posts/${postId}`
+        fetch(postURL, {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(postData => {
+            html = post2HTML(postData)
+            document.querySelector(`#post-${postId}`).innerHTML = html
+            document.querySelector(`#post-${postId} #comment`).focus()
+        })
     })
 }
 
@@ -357,7 +374,8 @@ const initPage = () => {
     })
     .then(response => response.json())
     .then(data => {
-        activeUser = data;)
+        activeUser = data
+    })
 
     fetch("http://127.0.0.1:5000/api/bookmarks/", {
         method: "GET",
@@ -367,12 +385,10 @@ const initPage = () => {
     })
     .then(bookmarks_response => bookmarks_response.json())
     .then(bookmarks_data => {
-        console.log("bookymarkies", bookmarks_data);
-
         for (let i = 0; i < bookmarks_data.length; i++) {
             bookmarks[bookmarks_data[i].post.id] = bookmarks_data[i].id
         }
-        console.log("bookymen!", bookmarks)})
+    })
         
     displayStories();
     getProfile();
