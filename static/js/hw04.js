@@ -140,7 +140,7 @@ const toggleLike = event => {
     console.log(postID)
 
     if (likeID != '0') { // Remove like
-        fetch("http://127.0.0.1:5000/api/posts/likes/" + likeID, {
+        fetch("/api/posts/likes/" + likeID, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
@@ -171,7 +171,7 @@ const toggleLike = event => {
             "post_id": postID
         };
         
-        fetch("http://127.0.0.1:5000/api/posts/likes/", {
+        fetch("/api/posts/likes/", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -208,7 +208,7 @@ function toggleBookmark(event) {
     // console.log("toggleBookmark postID", postID)
 
     if (bookmarkID != '0') { // Remove bookmark
-        fetch("http://127.0.0.1:5000/api/bookmarks/" + bookmarkID, {
+        fetch("/api/bookmarks/" + bookmarkID, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
@@ -231,7 +231,7 @@ function toggleBookmark(event) {
             "post_id": postID
         };
         
-        fetch("http://127.0.0.1:5000/api/bookmarks/", {
+        fetch("/api/bookmarks/", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
