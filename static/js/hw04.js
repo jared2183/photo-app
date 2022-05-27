@@ -326,6 +326,7 @@ const MODAL_COMMENT_HTML = (comment) => {
 function closeModal() {
     document.getElementById('modal').classList.remove('modal-visible')
     document.getElementById('modal').setAttribute('arria-hidden', 'true')
+    document.querySelector('body').style.overflow = 'auto'
 
     if (modalOpenedBy) {
         modalOpenedBy.focus()
@@ -336,6 +337,7 @@ var modalOpenedBy = null
 
 function openModal(postID, event) {
     document.getElementById('modal').classList.add('modal-visible');
+    document.querySelector('body').style.overflow = 'hidden'
 
     console.log(postID)
     console.log(posts[postID])
