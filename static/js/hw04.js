@@ -481,5 +481,12 @@ document.addEventListener('focus', function(event) {
     }
 }, true);
 
+// on escape key, close modal
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 27) {
+        closeModal();
+    }
+});
+
 // invoke init page to display stories:
 initPage();
