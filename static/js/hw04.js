@@ -140,7 +140,7 @@ const toggleLike = event => {
     postID = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('post_id');
 
     if (likeID != '0') { // Remove like
-        fetch("http://127.0.0.1:5000/api/posts/likes/" + likeID, {
+        fetch("/api/posts/likes/" + likeID, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
@@ -169,7 +169,7 @@ const toggleLike = event => {
             "post_id": postID
         };
         
-        fetch("http://127.0.0.1:5000/api/posts/likes/", {
+        fetch("/api/posts/likes/", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -202,7 +202,7 @@ function toggleBookmark(event) {
     postID = event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('post_id');
 
     if (bookmarkID != '0') { // Remove bookmark
-        fetch("http://127.0.0.1:5000/api/bookmarks/" + bookmarkID, {
+        fetch("/api/bookmarks/" + bookmarkID, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
@@ -224,7 +224,7 @@ function toggleBookmark(event) {
             "post_id": postID
         };
         
-        fetch("http://127.0.0.1:5000/api/bookmarks/", {
+        fetch("/api/bookmarks/", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -442,7 +442,7 @@ const displayStories = () => {
 var bookmarks = {}
 
 const initPage = () => {
-    fetch("http://127.0.0.1:5000/api/profile/", {
+    fetch("/api/profile/", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -453,7 +453,7 @@ const initPage = () => {
         activeUser = data
     })
 
-    fetch("http://127.0.0.1:5000/api/bookmarks/", {
+    fetch("/api/bookmarks/", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
