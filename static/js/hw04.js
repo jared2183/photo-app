@@ -13,7 +13,10 @@ const user2Html = user => {
     return `
         <section>
             <img src="${user.thumb_url}">
-            <p class="username">${user.username}</p>
+            <div>
+                <h4 class="username">${user.username}</h4>
+                <p>Suggested for you</p>
+            </div>
             <button aria-label="Follow button" aria-checked="false" class="Follow" onClick=toggleFollow(event) data-user-id=${user.id}>Follow</button>
         </section>
     `;

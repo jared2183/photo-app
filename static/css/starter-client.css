@@ -207,7 +207,7 @@ main {
 }
 
 .suggestions section {
-    display: grid;
+    display: flex;
     grid-template-columns: 35px 2fr 1fr;
     align-items: center;
     width: 25vw;
@@ -216,6 +216,16 @@ main {
     padding: 8px;
     width: 200px;
 }
+
+.suggestions section > div > h4 {
+    margin: 5px;
+}
+
+.suggestions section > button {
+    font-size: large;
+    color:rgb(44, 105, 155);
+}
+
 .suggestions section p, .suggestions section a {
     margin: 0px;
 }
@@ -233,11 +243,11 @@ main {
     font-size: 0.8em;
     font-weight: 400;
 }
-.suggestions section .pic {
-    min-width: 30px;
-    min-height: 30px;
+.suggestions section img {
+    min-width: 50px;
+    min-height: 50px;
     border: solid 1px #dbdbdb;
-    border-radius: 15px;
+    border-radius: 50%;
 }
 aside header {
     display: flex;
@@ -245,10 +255,16 @@ aside header {
     width: 25vw;
 }
 
-aside header .pic {
+aside header * {
+    display: inline;
+    /* vertically align elements */
+    vertical-align: middle;
+}
+
+aside header img {
     min-width: 60px;
     min-height: 60px;
-    border-radius: 33px;
+    border-radius: 50%;
     border-width: 0px;
     margin-right: 20px;
 }
