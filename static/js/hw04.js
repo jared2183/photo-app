@@ -341,6 +341,7 @@ var modalOpenedBy = null
 function openModal(postID, event) {
     document.getElementById('modal').classList.add('modal-visible');
     document.querySelector('body').style.overflow = 'hidden'
+    document.getElementById('modal-close').focus()
 
     console.log(postID)
     console.log(posts[postID])
