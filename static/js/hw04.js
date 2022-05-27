@@ -388,7 +388,7 @@ const newComment = (event) => {
         .then(response => response.json())
         .then(postData => {
             html = post2HTML(postData)
-            document.querySelector(`#post-${postId}`).innerHTML = html
+            document.querySelector(`#post-${postId}`).outerHTML = html
             document.querySelector(`#post-${postId} #comment`).focus()
         })
     })
