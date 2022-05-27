@@ -70,7 +70,7 @@ const post2HTML = (post) => {
         postHTML += comment2Html(comments[0])
     }
     else if (comments.length > 1) {
-        postHTML += `<button onClick=openModal(${post.id})>View all ${comments.length} comments</button>`
+        postHTML += `<button onClick="openModal(${post.id}, event)">View all ${comments.length} comments</button>`
         postHTML += comment2Html(comments[comments.length - 1])
     }
 
@@ -323,7 +323,18 @@ const MODAL_COMMENT_HTML = (comment) => {
     </div>`
 }
 
-function openModal(postID) {
+function closeModal() {
+    document.getElementById('modal').classList.remove('modal-visible')
+    document.getElementById('modal').setAttribute('arria-hidden', 'true')
+
+    if (modalOpenedBy) {
+        modalOpenedBy.focus()
+    }
+}
+
+var modalOpenedBy = null
+
+function openModal(postID, event) {
     document.getElementById('modal').classList.add('modal-visible');
 
     console.log(postID)
@@ -331,6 +342,9 @@ function openModal(postID) {
 
     const post = posts[postID]
 
+    modalOpenedBy = event.target
+
+    document.getElementById('modal').setAttribute('aria-hidden', 'false')
     document.getElementById('modal-img').setAttribute('src', post.image_url)
     document.getElementById('modal-author').innerHTML = post.user.username
     document.getElementById('modal-author-img').setAttribute('src', post.user.thumb_url)
@@ -457,6 +471,15 @@ const initPage = () => {
     getSuggestion();
     getPosts();
 };
+
+const modalElement = document.getElementById('modal');
+document.addEventListener('focus', function(event) {
+    console.log('focus');
+    if (modalElement.getAttribute('aria-hidden') === 'false' && !modalElement.contains(event.target)) {;
+        event.stopPropagation();
+        document.querySelector('.close').focus();
+    }
+}, true);
 
 // invoke init page to display stories:
 initPage();

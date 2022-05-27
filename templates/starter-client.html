@@ -38,16 +38,16 @@
 
     </main>
 
-    <div id="modal" class="modal">
-        <button onclick="event.target.parentElement.classList.remove('modal-visible')">X</button>
-        <div class="modal-content">
+    <div id="modal" class="modal" aria-hidden="true" role="dialog">
+        <button aria-label="Close the modal window" onclick="closeModal(event)">X</button>
+        <div class="modal-content" aria-label="Close the modal window">
             <div class="modal-image">
                 <img id="modal-img" src="https://picsum.photos/400" alt="">
             </div>
             <div class="modal-body">
                 <div class="modal-header">
                     <img id="modal-author-img" src="https://picsum.photos/100" alt="">
-                    <h1 id="modal-author" class="modal-title">luke_brown</h1>
+                    <h1 id="modal-author" class="modal-title"></h1>
                 </div>
 
                 <div id="modal-comments" class="modal-comments">
