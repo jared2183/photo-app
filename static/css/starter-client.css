@@ -44,6 +44,14 @@ button.link.following.active {
     border: solid 1px #CCC;
     border-radius: 4px;
 }
+
+button {
+    border: none;
+    background-color: transparent;
+    padding: 0px;
+    font-size: x-large;
+}
+
 header {
     margin-top: 20px;
 }

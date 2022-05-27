@@ -479,9 +479,16 @@ document.addEventListener('focus', function(event) {
     console.log('focus');
     if (modalElement.getAttribute('aria-hidden') === 'false' && !modalElement.contains(event.target)) {;
         event.stopPropagation();
-        document.querySelector('.close').focus();
+        document.querySelector('#modal-close').focus();
     }
 }, true);
+
+// on escape key, close modal
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 27) {
+        closeModal();
+    }
+});
 
 // invoke init page to display stories:
 initPage();
