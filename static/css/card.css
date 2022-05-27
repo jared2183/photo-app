@@ -1,7 +1,7 @@
 /* Card */
 
 .card {
-    width: 60%;
+    width: 100%;
     background-color: #fff;
     margin-bottom: 30px;
     border: 1px solid lightgray;
@@ -83,9 +83,14 @@
     justify-content: space-between;
     align-items: center;
     font-size: larger;
-    padding: 20px;
-    padding-top: 00px;
-    gap: 10px;
+}
+
+.card-footer * {
+    margin: 5px;
+}
+
+.card-footer button {
+    font-size: large;
 }
 
 .card-footer input {
