@@ -4,7 +4,6 @@ class NavBar extends React.Component {
 
     constructor(props) {
         super(props);
-        // constructor logic
     }
 
     componentDidMount() {
@@ -14,10 +13,10 @@ class NavBar extends React.Component {
     render () {
         return (
             <nav className="main-nav">
-                <h1>{this.props.title}</h1>
+                <h1>Photo App</h1>
                 <ul>   
                     <li><a href="/api">API Docs</a></li>
-                    <li><span>username</span></li>
+                    <li><span>{this.props.profile.username}</span></li>
                     <li><a href="/logout">Sign out</a></li>
                 </ul> 
             </nav>       

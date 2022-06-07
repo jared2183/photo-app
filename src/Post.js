@@ -20,6 +20,7 @@ class Post extends React.Component {
             })
             .then(response => response.json())
             .then(data => {
+                // @TODO: Remove
                 if (data.likes) {
                     data.likes.forEach(like => {
                         if (like.user_id === 1) {
