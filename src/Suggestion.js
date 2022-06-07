@@ -11,7 +11,7 @@ class NavBar extends React.Component {
             suggestion: this.props.model
         }
 
-        console.log('suggestion', this.state.suggestion);
+        // console.log('suggestion', this.state.suggestion);
         this.toggleFollowing = this.toggleFollowing.bind(this);
     }
 
@@ -52,7 +52,7 @@ class NavBar extends React.Component {
     render () {
         const suggestion = this.state.suggestion;
 
-        console.log('suggestion rerendered', suggestion.following_id);
+        // console.log('suggestion rerendered', suggestion.following_id);
 
         return (
             <section>

@@ -96,7 +96,7 @@ class Post extends React.Component {
                         </div>
                     </div>
                     <p className="likes">
-                        <strong>{(post.likes.length + " like" + (post.likes.length == 1 ? "" : "s"))}</strong>
+                        <strong>{(post.likes.length + " like" + (post.likes.length === 1 ? "" : "s"))}</strong>
                     </p>
                     <div className="caption">
                         <p><strong>{post.user.username}</strong>{post.caption}</p>
