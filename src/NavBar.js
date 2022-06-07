@@ -8,7 +8,7 @@ class NavBar extends React.Component {
     }
 
     componentDidMount() {
-        // fetch posts
+        // componentDidMount logic
     }
 
     render () {
@@ -17,7 +17,7 @@ class NavBar extends React.Component {
                 <h1>{this.props.title}</h1>
                 <ul>   
                     <li><a href="/api">API Docs</a></li>
-                    <li><span>username</span></li>
+                    <li><span>{this.props.username}</span></li>
                     <li><a href="/logout">Sign out</a></li>
                 </ul> 
             </nav>       

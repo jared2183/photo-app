@@ -10,7 +10,7 @@ class App extends React.Component {
     render () {
         return (
             <div>
-                <NavBar title="Photo App" username="my user" />
+                <NavBar title="Photo App" username={this.props.username} />
                 <aside>
                     <Profile />
                     <Suggestions />
