@@ -56,10 +56,13 @@ class Post extends React.Component {
         
         let commentPreview = null;
         if (post.comments.length > 0) {
+            const latestComment = post.comments.pop();
+            console.log(latestComment)
             commentPreview = (
                 <div className="comments">
                     <div>
-                        <p><strong>{post.comments}</strong></p>
+                        <p><strong>{latestComment.user.username}</strong> {latestComment.text}</p>
+                        <p class="timestamp">{latestComment.display_time}</p>
                     </div>
                 </div>
             )
@@ -103,6 +106,7 @@ class Post extends React.Component {
                         <p className="timestamp">{post.display_time}</p>
                     </div>
                     {commentButton}
+                    {commentPreview}
                 </div>
                 <AddComment
                     postId={post.id}
