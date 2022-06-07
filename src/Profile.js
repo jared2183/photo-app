@@ -15,7 +15,7 @@ class Profile extends React.Component {
         return (
             <header>
                 <div>
-                    <img class="pic" src={this.props.profile.thumb_url} alt="Profile" />
+                    <img className="pic" src={this.props.profile.thumb_url} alt="Profile" />
                     <h1>{this.props.profile.username}</h1>
                 </div>
             </header>  

@@ -41,7 +41,7 @@ class Suggestions extends React.Component {
 
         return (
             <div className="suggestions">
-                <p class="suggestion-text">Suggestions for you</p>
+                <p className="suggestion-text">Suggestions for you</p>
                 {
                     suggestions.map(suggestion => {
                         return (
