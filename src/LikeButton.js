@@ -48,7 +48,8 @@ class LikeButton extends React.Component {
     render () {
         const likeId = this.props.likeId;
         return (
-            <button role="switch"
+            <button
+                role="switch"
                 className="like" 
                 aria-label="Like Button" 
                 aria-checked={likeId ? true : false}

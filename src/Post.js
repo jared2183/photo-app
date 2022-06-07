@@ -1,6 +1,8 @@
 import React from 'react';
 import LikeButton from './LikeButton';
 import BookmarkButton from './BookmarkButton';
+import AddComment from './AddComment';
+
 import {getHeaders} from './utils';
 
 class Post extends React.Component {  
@@ -10,6 +12,8 @@ class Post extends React.Component {
         this.state = {
             post: this.props.model
         }
+
+        console.log(this.state.post);
 
         this.requeryPost = this.requeryPost.bind(this);
     }
@@ -38,11 +42,29 @@ class Post extends React.Component {
     
     render () {
         const post = this.state.post;
+
         if (!post) {
             return (
                 <div></div>  
             );
         }
+
+        let commentButton = null;
+        if (post.comments.length > 1) {
+            commentButton = <button className="link">View all {post.comments.length} comments</button>
+        }
+        
+        let commentPreview = null;
+        if (post.comments.length > 0) {
+            commentPreview = (
+                <div className="comments">
+                    <div>
+                        <p><strong>{post.comments}</strong></p>
+                    </div>
+                </div>
+            )
+        }
+
         return (
             <section className="card">
                 <div className="header">
@@ -57,18 +79,34 @@ class Post extends React.Component {
                     height="300" />
                 
                 <div className="info">
-                    <div>
-                        <LikeButton 
-                            postId={post.id} 
-                            likeId={post.current_user_like_id}
-                            requeryPost={this.requeryPost} />
-                        <BookmarkButton
-                            postId={post.id}
-                            bookmarkId={post.current_user_bookmark_id}
-                            requeryPost={this.requeryPost} />
+                    <div className="buttons">
+                        <div>
+                            <LikeButton 
+                                postId={post.id} 
+                                likeId={post.current_user_like_id}
+                                requeryPost={this.requeryPost} />
+                            <i className="far fa-comment"></i>
+                            <i className="far fa-paper-plane"></i>
+                        </div>
+                        <div>
+                            <BookmarkButton
+                                postId={post.id}
+                                bookmarkId={post.current_user_bookmark_id}
+                                requeryPost={this.requeryPost} />
+                        </div>
                     </div>
-                    <p>{ post.caption }</p>
+                    <p className="likes">
+                        <strong>{(post.likes.length + " like" + (post.likes.length == 1 ? "" : "s"))}</strong>
+                    </p>
+                    <div className="caption">
+                        <p><strong>{post.user.username}</strong>{post.caption}</p>
+                        <p className="timestamp">{post.display_time}</p>
+                    </div>
+                    {commentButton}
                 </div>
+                <AddComment
+                    postId={post.id}
+                    requeryPost={this.requeryPost} />
             </section> 
         );     
     }

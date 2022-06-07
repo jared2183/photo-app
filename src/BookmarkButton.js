@@ -48,7 +48,8 @@ class BookmarkButton extends React.Component {
     render () {
         const bookmarkId = this.props.bookmarkId;
         return (
-            <button role="switch"
+            <button
+                role="switch"
                 className="bookmark" 
                 aria-label="Bookmark Button" 
                 aria-checked={bookmarkId ? true : false}
