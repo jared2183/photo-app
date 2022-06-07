@@ -12,10 +12,8 @@ class LikeButton extends React.Component {
 
     toggleLike(ev) {
         if (this.props.likeId) {
-            console.log('unlike');
             this.unlike();
         } else {
-            console.log('like');
             this.like();
         }
     }

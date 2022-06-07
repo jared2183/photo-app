@@ -29,8 +29,6 @@ class Post extends React.Component {
                     });
                 }
 
-                console.log(data);
-
                 this.setState({ 
                     post: data
                 });

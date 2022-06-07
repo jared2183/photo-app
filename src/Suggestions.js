@@ -4,12 +4,10 @@ class Suggestions extends React.Component {
     constructor(props) {
         super(props);
         // constructor logic
-        console.log('Suggestions component created');
     }
 
     componentDidMount() {
         // fetch posts
-        console.log('Suggestions component mounted');
     }
 
     render () {

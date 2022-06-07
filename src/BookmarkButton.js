@@ -12,10 +12,8 @@ class BookmarkButton extends React.Component {
 
     toggleBookmark(ev) {
         if (this.props.bookmarkId) {
-            console.log('unbookmark');
             this.unbookmark();
         } else {
-            console.log('bookmark');
             this.bookmark();
         }
     }
