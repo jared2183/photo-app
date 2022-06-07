@@ -40,7 +40,7 @@ class App extends React.Component {
 
         if (!profile) {
             return (
-                <div></div>  
+                <div></div>
             );
         }
 

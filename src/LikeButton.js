@@ -10,7 +10,7 @@ class LikeButton extends React.Component {
         this.unlike = this.unlike.bind(this);
     }
 
-    toggleLike(ev) {
+    toggleLike() {
         if (this.props.likeId) {
             this.unlike();
         } else {

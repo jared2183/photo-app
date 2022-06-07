@@ -1,6 +1,7 @@
 import React from 'react';
-import Post from './Post';
 import {getHeaders} from './utils';
+
+import Post from './Post';
 
 class Posts extends React.Component {  
 

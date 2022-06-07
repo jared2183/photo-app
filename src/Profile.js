@@ -13,7 +13,12 @@ class Profile extends React.Component {
 
     render () {
         return (
-            <header>empty profile.</header>  
+            <header>
+                <div>
+                    <img class="pic" src={this.props.profile.thumb_url} alt="Profile" />
+                    <h1>{this.props.profile.username}</h1>
+                </div>
+            </header>  
         );
     }
 }
