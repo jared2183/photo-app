@@ -21,7 +21,7 @@ class BookmarkButton extends React.Component {
     }
 
     bookmark() {
-        fetch(`/api/bookmarks`, {
+        fetch(`https://photo-app-secured.herokuapp.com/api/bookmarks`, {
                 method: 'POST',
                 headers: getHeaders(),
                 body: JSON.stringify({
@@ -37,7 +37,7 @@ class BookmarkButton extends React.Component {
     }
 
     unbookmark() {
-        fetch(`/api/bookmarks/` + this.props.bookmarkId, {
+        fetch(`https://photo-app-secured.herokuapp.com/api/bookmarks/` + this.props.bookmarkId, {
             method: 'DELETE',
             headers: getHeaders(),
         }).then(response => {
