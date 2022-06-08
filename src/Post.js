@@ -13,7 +13,7 @@ class Post extends React.Component {
             post: this.props.model
         }
 
-        console.log(this.state.post);
+        // console.log(this.state.post);
 
         this.requeryPost = this.requeryPost.bind(this);
     }
@@ -57,12 +57,12 @@ class Post extends React.Component {
         let commentPreview = null;
         if (post.comments.length > 0) {
             const latestComment = post.comments.pop();
-            console.log(latestComment)
+            // console.log(latestComment)
             commentPreview = (
                 <div className="comments">
                     <div>
                         <p><strong>{latestComment.user.username}</strong> {latestComment.text}</p>
-                        <p class="timestamp">{latestComment.display_time}</p>
+                        <p className="timestamp">{latestComment.display_time}</p>
                     </div>
                 </div>
             )

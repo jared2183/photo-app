@@ -2,9 +2,9 @@ import React from 'react';
 
 class NavBar extends React.Component {  
 
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     componentDidMount() {
         // fetch posts

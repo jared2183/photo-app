@@ -2,10 +2,10 @@ import React from 'react';
 
 class Profile extends React.Component {  
 
-    constructor(props) {
-        super(props);
-        // constructor logic
-    }
+    // constructor(props) {
+    //     super(props);
+    //     // constructor logic
+    // }
 
     componentDidMount() {
         // fetch posts

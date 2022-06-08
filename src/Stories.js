@@ -15,7 +15,7 @@ class Story extends React.Component {
 
         return (
             <div className="story">
-                <img src={story.user.thumb_url} class="pic" alt="profile pic" />
+                <img src={story.user.thumb_url} className="pic" alt="profile pic" />
                 <p>{story.user.username}</p>
             </div>
         )
@@ -55,7 +55,7 @@ class Stories extends React.Component {
         console.log('Username: ', story.user.username)
         return (
             <div className="story">
-                <img src={story.user.thumb_url} class="pic" alt="profile pic" />
+                <img src={story.user.thumb_url} className="pic" alt="profile pic" />
                 <p>{story.user.username}</p>
             </div>
         );
@@ -68,7 +68,7 @@ class Stories extends React.Component {
             {
                 stories.map(story => {
                     return (
-                        <Story model={story} />
+                        <Story model={story} key={'story-' + story.id} />
                     )
                 })
             }
