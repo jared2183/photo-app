@@ -8,9 +8,13 @@ class LikeButton extends React.Component {
         this.toggleLike = this.toggleLike.bind(this);
         this.like = this.like.bind(this);
         this.unlike = this.unlike.bind(this);
+
+        this.iLiked = false;
     }
 
     toggleLike() {
+        this.iLiked = true;
+        
         if (this.props.likeId) {
             this.unlike();
         } else {
@@ -47,6 +51,8 @@ class LikeButton extends React.Component {
 
     render () {
         const likeId = this.props.likeId;
+        const likedClass = this.iLiked ? 'iliked' : 'liked';
+
         return (
             <button
                 role="switch"
@@ -54,7 +60,7 @@ class LikeButton extends React.Component {
                 aria-label="Like Button" 
                 aria-checked={likeId ? true : false}
                 onClick={this.toggleLike}>
-                <i className={likeId ? 'fas fa-heart' : 'far fa-heart'}></i>                        
+                <i className={likeId ? 'fas fa-heart ' + likedClass : 'far fa-heart'}></i>                        
             </button>
         ) 
     }

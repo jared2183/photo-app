@@ -31,10 +31,10 @@ class Modal extends React.Component {
                     <i className="fas fa-times"></i>
                 </button>
                 <div className="modal" role="dialog" aria-live="assertive">
-                    <img className="featured-image" src={this.props.model.image_url} />
+                    <img className="featured-image" alt={`${this.props.model.user.username}'s post`} src={this.props.model.image_url} />
                     <div className="container">
                         <h3>
-                            <img className="pic" src={this.props.model.user.thumb_url} />
+                            <img className="pic" alt={`${this.props.model.user.username}'s profile`} src={this.props.model.user.thumb_url} />
                             {this.props.model.user.username}
                         </h3>
                         <div className="body">

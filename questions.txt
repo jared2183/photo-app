@@ -1,0 +1,16 @@
+Accessibility:
+
+Partner: Jared Yang
+
+Extra Credit:
+    Heroku: https://photo-app-final-alan.herokuapp.com/
+    Modal: Yes
+    Stylize: Yes
+        - Dark theme
+        - Pride logo
+        - Custom like animation
+        - Post update animation (on like, bookmark, comment, etc.)
+        - Custom card header & button div (animates on hover)
+            - If I wasn't supposed to remove the like counter, it's commented over in Post.js (lines 129-131)
+        - Greeting in profile
+        - Profile picture in navbar

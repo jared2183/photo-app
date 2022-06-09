@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
 
 * {
     box-sizing: border-box;
@@ -49,6 +50,7 @@ header {
 
 nav {
     position: sticky;
+    z-index: 1;
     height: 70px;
     width: 100%;
     background-color: rgb(24, 26, 27);
@@ -58,16 +60,50 @@ nav {
     padding: 0px 3vw;
 }
 
+/* courtesy of https://ilikekillnerds.com/2015/07/recreating-facebooks-celebrate-pride-rainbow-overlay-3-different-ways-using-css/ */
+nav > h1 {
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 62, 24, 1) 16.66666666666667%, 
+        rgba(252, 154, 0, 1) 16.66666666666667%, 
+        rgba(252, 154, 0, 1) 33.33333333333333%, 
+        rgba(255, 216, 0, 1) 33.33333333333333%, 
+        rgba(255, 216, 0, 1) 33.33333333333333%, 
+        rgba(255, 216, 0, 1) 50.00000000000001%, 
+        rgba(57, 234, 124, 1) 50.00000000000001%, 
+        rgba(57, 234, 124, 1) 66.66666666666668%,
+        rgba(11, 178, 255, 1) 66.66666666666668%,
+        rgba(11, 178, 255, 1) 83.33333333333335%,
+        rgba(152, 90, 255, 1) 83.33333333333335%
+    );
+    background-clip: text;
+    color: rgba(255, 255, 255, 0.25);
+    animation: pride-logo;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
 nav, nav ul, .card .header, .card .buttons, .card .add-comment {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 nav ul {
     list-style-type: none;
 }
+
 li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-left: 30px;
+}
+
+li img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 aside {
@@ -123,6 +159,7 @@ main {
 }
 
 .card {
+    position: relative;
     border: solid 1px rgb(58, 63, 65);
     margin-bottom: 30px;
     background-color: rgb(24, 26, 27);
@@ -130,19 +167,87 @@ main {
     min-width: 540px;
 }
 
+/* courtesy of https://css-tricks.com/animating-a-css-gradient-border/ */
+@keyframes card-border-radiate {
+    0% {
+        border-image: linear-gradient(-45deg, rgb(58, 63, 65), rgb(58, 63, 65)) 1;
+    }
+    25% {
+        border-image: linear-gradient(-45deg, rgb(58, 63, 65), rgb(81, 193, 238)) 1;
+    }
+    50% {
+        border-image: linear-gradient(-45deg, rgb(81, 193, 238), rgb(81, 193, 238)) 1;
+    }
+    75% {
+        border-image: linear-gradient(-45deg, rgb(81, 193, 238), rgb(58, 63, 65)) 1;
+    }
+    100% {
+        border-image: linear-gradient(-45deg, rgb(58, 63, 65)) 1;
+    }
+}
+
+.card-update-anim {
+    animation: 0.5s card-border-radiate ease-in;
+    animation-iteration-count: 1;
+    border-image: linear-gradient(-45deg, rgb(58, 63, 65), rgb(58, 63, 65)) 1;
+}
+
 .card img {
     width: 100%;
     height: auto;
 }
+
 .card .header, .card .info {
-    padding: 10px;
+    padding-left: 10px;
     color: #444;
 }
 
+.card .header {
+    opacity: 30%;
+    transition: opacity 0.1s ease-in;
+    position: absolute;
+    padding-left: 10px;
+    background-image: linear-gradient(to bottom, rgba(24, 26, 27, 0.8), rgba(24, 26, 27, 0));
+    height: 40px;
+    width: 100%;
+}
+
+.card .header:hover {
+    opacity: 100%;
+    transition: opacity 0.1s ease-in;
+}
+
+.card .header h3 {
+    text-shadow: #333 0px 0px 5px;
+}
+
 .card .buttons {
+    opacity: 40%;
+    transition: opacity 0.1s ease-in;
+    position: relative;
+    background-image: linear-gradient(to top, rgba(24, 26, 27, 0.8), rgba(24, 26, 27, 0));
+    height: 40px;
+    top: -40px;
+    margin-bottom: -40px;
+    width: 100%;
     font-size: 1.3em;
     padding: 5px;
 }
+
+.card .buttons div:nth-child(1) span {
+    margin-right: 10px;
+}
+
+.like-button {
+    transition: color 0.5s ease-in;
+    transform: scale(1) !important;
+}
+
+.card .buttons:hover {
+    opacity: 100%;
+    transition: opacity 0.1s ease-in;
+}
+
 .card .buttons i {
     margin-right: 4px;
 }
@@ -200,7 +305,7 @@ main {
 }
 
 .suggestion-text {
-    color: #666;
+    color: rgb(168, 160, 149);
     font-weight: 600;
     letter-spacing: 0px;
 }
@@ -245,6 +350,10 @@ aside header > div {
     display: flex;
     align-items: center;
     width: 25vw;
+}
+
+aside header > div > div > * {
+    margin: 5px;
 }
 
 aside header .pic {
@@ -362,7 +471,44 @@ button.like, button.bookmark {
     font-size: 1em;
     border: 0;
 }
-.fas.fa-heart {
+
+@keyframes likeAnim {
+    0% {
+        color: rgb(189, 183, 175);
+        transform: scale(1);
+    }
+    20% {
+        color: #ffaa43;
+        transform: scale(1.5);
+    }
+    40% {
+        color: #fff453;
+    }
+    50% {
+        color: #44ff7c;
+        transform: scale(1.1);
+    }
+    60% {
+        color: hsl(222, 100%, 65%);
+    }
+    80% {
+        color: rgb(232, 82, 255);
+    }
+    100% {
+        color: rgb(244, 62, 62);
+        transform: scale(1);
+    }
+}
+
+.iliked {
+    color: rgb(244, 62, 62);
+    animation-name: likeAnim;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+}
+
+.liked {
     color: rgb(244, 62, 62);
 }
 

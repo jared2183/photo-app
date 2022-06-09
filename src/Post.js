@@ -20,24 +20,16 @@ class Post extends React.Component {
 
         this.requeryPost = this.requeryPost.bind(this);
         this.openModal = this.openModal.bind(this);
+        this.skipAnim = true;
     }
 
     requeryPost() {
+        this.skipAnim = false;
         fetch(`https://photo-app-secured.herokuapp.com/api/posts/${this.state.post.id}`, {
                 headers: getHeaders()
             })
             .then(response => response.json())
             .then(data => {
-                // @TODO: Remove
-                if (data.likes) {
-                    data.likes.forEach(like => {
-                        if (like.user_id === 1) {
-                            data.current_user_like_id = like.id;
-                            return;
-                        }
-                    });
-                }
-
                 this.setState({ 
                     post: data
                 });
@@ -45,21 +37,28 @@ class Post extends React.Component {
     }
 
     openModal() {
-        console.log('hello beautiful');
-
         ReactDOM.render(
             <Modal model={this.state.post} />,
             document.getElementById('modal')
         )
     }
     
-    render () {
+    render() {
         const post = this.state.post;
 
         if (!post) {
             return (
                 <div></div>  
             );
+        }
+
+        if (!this.skipAnim) {
+            setTimeout(() => {
+                this.skipAnim = true;
+                this.setState({
+                    post: this.state.post
+                })
+            }, 500);
         }
 
         let commentButton = null;
@@ -73,7 +72,7 @@ class Post extends React.Component {
         
         let commentPreview = null;
         if (post.comments.length > 0) {
-            const latestComment = post.comments.pop();
+            const latestComment = post.comments[post.comments.length - 1];
             // console.log(latestComment)
             commentPreview = (
                 <div className="comments">
@@ -86,7 +85,7 @@ class Post extends React.Component {
         }
 
         return (
-            <section className="card">
+            <section key={`post-${post.id}`} className={`card${this.skipAnim ? '' : ' card-update-anim'}`}>
                 <div className="header">
                     <h3>{ post.user.username }</h3>
                     <i className="fa fa-dots"></i>
@@ -98,28 +97,34 @@ class Post extends React.Component {
                     width="300" 
                     height="300" />
                 
-                <div className="info">
-                    <div className="buttons">
-                        <div>
+                <div className="buttons">
+                    <div>
+                        <span>
                             <LikeButton 
                                 postId={post.id} 
                                 likeId={post.current_user_like_id}
-                                requeryPost={this.requeryPost} />
+                                requeryPost={this.requeryPost}>
+                            </LikeButton>
+                            <strong className={this.skipAnim ? 'like-button' : 'like-button likeAnim'}>{(post.likes.length)}</strong>
+                        </span>
+                        <span>                            
                             <i className="far fa-comment"></i>
                             <i className="far fa-paper-plane"></i>
-                        </div>
-
-                        <div>
-                            <BookmarkButton
-                                postId={post.id}
-                                bookmarkId={post.current_user_bookmark_id}
-                                requeryPost={this.requeryPost} />
-                        </div>
+                        </span>
                     </div>
 
-                    <p className="likes">
+                    <div>
+                        <BookmarkButton
+                            postId={post.id}
+                            bookmarkId={post.current_user_bookmark_id}
+                            requeryPost={this.requeryPost} />
+                    </div>
+                </div>
+
+                <div className="info">
+                    {/* <p className="likes">
                         <strong>{(post.likes.length + " like" + (post.likes.length === 1 ? "" : "s"))}</strong>
-                    </p>
+                    </p> */}
 
                     <div className="caption">
                         <p><strong>{post.user.username}</strong>{post.caption}</p>
