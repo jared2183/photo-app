@@ -6,17 +6,23 @@ class AddComment extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '' 
+            value: ''
         }
         this.textInput = React.createRef();
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.submitOnEnter = this.submitOnEnter.bind(this);
     }
 
     handleChange(event) {
         this.setState({ value: event.target.value });
-        console.log('Changed State: ', this.state.value)
+    }
+
+    submitOnEnter(event) {
+        if (event.key === 'Enter') {
+            console.log('do validate');
+          }
     }
 
     handleSubmit(event) {
@@ -30,26 +36,28 @@ class AddComment extends React.Component {
             method: 'POST',
             headers: getHeaders(),
             body: JSON.stringify(commentRequest)
+        })
+            .then(data => {
+                if (data.ok) {
+                    this.props.requeryPost();
+                }
             })
-        .then(data => {
-            if (data.ok) {
-                this.props.requeryPost();
-            }
-        })
-        .then(() => {
-            this.setState({ value: '' });
-            console.log('Submit State: ', this.state.value)
-            // this.textInput.current.focus();
-        })
+            .then(() => {
+                this.setState({ value: '' });
+                this.textInput.current.focus();
+            })
     }
 
     render() {
         return (
-            <div className="card-footer">
-                <i className="far fa-smile"></i>
-                <input type="text" id="comment" placeholder="Add a comment..." aria-label="Add a comment" onChange={this.handleChange} />
-                    <button className="comment" post_id={this.props.postId} onClick={this.handleSubmit}>Post</button>
-            </div>
+            <form className="add-comment">
+                <div className="input-holder">
+                    <input type="text" className="comment-textbox" aria-label="Add a comment" placeholder="Add a comment..." 
+                    value={this.state.value} onChange={this.handleChange} onKeyDown={this.submitOnEnter} ref={this.textInput}>
+                    </input>
+                </div>
+                <button className="link" onClick={this.handleSubmit}>Post</button>
+            </form>
         );
     }
 }
