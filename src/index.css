@@ -2,12 +2,13 @@
 
 * {
     box-sizing: border-box;
+    color: rgb(189, 183, 175);
 }
 
 body {
     margin: 0px;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f2f2f2;
+    background-color: rgb(31, 34, 35);
 }
 
 aside, main, nav {
@@ -15,28 +16,29 @@ aside, main, nav {
 }
 
 h1, h2, h3, h4 {
+    color: white;
     font-family: 'Comfortaa', cursive;
 }
 a, a:visited, a:hover, a:link {
-    color: rgb(44, 105, 155);
+    color: rgb(122, 177, 217);
 }
 a:hover {
-    color: #777;
+    color: rgb(157, 148, 136);
 }
 button.link {
-    color: rgb(44, 105, 155);
+    color: rgb(122, 177, 217);
     background-color: transparent;
     border-width: 0px;
 }
 button.link:hover {
-    color: #777;
+    color: rgb(157, 148, 136);
 }
 
 button.link.following {
     padding: 5px 10px !important;
 }
 button.link.following.active {
-    background-color: white;
+    background-color: rgb(24, 26, 27);
     padding: 5px 10px !important;
     border: solid 1px #CCC;
     border-radius: 4px;
@@ -49,8 +51,8 @@ nav {
     position: sticky;
     height: 70px;
     width: 100%;
-    background-color: white;
-    border-bottom: solid #dbdbdb 1px;
+    background-color: rgb(24, 26, 27);
+    border-bottom: solid rgb(58, 63, 65) 1px;
     left: 0px;
     top: 0px;
     padding: 0px 3vw;
@@ -73,8 +75,7 @@ aside {
     right: 0px;
     top: 70px;
     width: calc(40vw - 6px);
-    /* background-color: #fafafa; */
-    background-color: #f2f2f2;
+    background-color: rgb(31, 34, 35);
     height: calc(100vh - 100px);
     padding-left: 30px;
 }
@@ -93,9 +94,9 @@ main {
 
     width: 50vw;
     min-width: 540px;
-    border: solid 1px #dbdbdb;
+    border: solid 1px rgb(58, 63, 65);
     margin-bottom: 30px;
-    background-color: #fff;
+    background-color: rgb(24, 26, 27);
     overflow: hidden;
 }
 .stories > div {
@@ -107,7 +108,7 @@ main {
 .stories > div .pic {
     min-width: 50px;
     min-height: 50px;
-    border: solid 3px #dbdbdb;
+    border: solid 3px rgb(58, 63, 65);
     border-radius: 27px;
 }
 .stories p {
@@ -122,9 +123,9 @@ main {
 }
 
 .card {
-    border: solid 1px #dbdbdb;
+    border: solid 1px rgb(58, 63, 65);
     margin-bottom: 30px;
-    background-color: #fff;
+    background-color: rgb(24, 26, 27);
     width: 50vw;
     min-width: 540px;
 }
@@ -164,7 +165,7 @@ main {
     margin-bottom: 5px;
 }
 .card .add-comment {
-    border-top: solid 1px #dbdbdb;
+    border-top: solid 1px rgb(58, 63, 65);
     padding: 10px 15px;
 }
 
@@ -173,6 +174,7 @@ main {
 }
 
 .card .add-comment input, .card .add-comment input:focus, .card .add-comment input:focus-visible {
+    background-color: rgb(24, 26, 27);
     border-width: 0px;
     outline: none;
     font-size: 0.95em;
@@ -225,15 +227,18 @@ main {
 .suggestions section a {
     font-size: 0.8em;
 }
+.suggestions section p:nth-child(1) {
+    color: rgb(200, 195, 188);
+}
 .suggestions section p:nth-child(2) {
-    color: #666;
+    color: rgb(168, 160, 149);
     font-size: 0.8em;
     font-weight: 400;
 }
 .suggestions section .pic {
     min-width: 30px;
     min-height: 30px;
-    border: solid 1px #dbdbdb;
+    border: solid 1px rgb(58, 63, 65);
     border-radius: 15px;
 }
 aside header > div {
@@ -271,13 +276,13 @@ aside header .pic {
     top: 10px;
     right: 10px;
     background: transparent;
-    color: white;
+    color: rgb(24, 26, 27);
     border: 0;
     font-size: 2em;
 }
 
 div.modal {
-    background: white;
+    background: rgb(24, 26, 27);
     height: 80vh;
     width: 90vw;
     background: #EEE;
@@ -290,18 +295,18 @@ div.modal {
 div.modal .container {
     height: 100%;
     overflow-y: auto;
-    background: #fff;
+    background: rgb(24, 26, 27);
     min-width: 300px;
 }
 div.modal .container h3 {
     padding: 20px;
-    border-bottom: solid 1px #F2f2f2;
+    border-bottom: solid 1px rgb(31, 34, 35);
     margin: 0px;
     display: flex;
     align-items: center;
     position: sticky;
     top: 0;
-    background: white;
+    background: rgb(24, 26, 27);
     z-index: 100;
 }
 div.modal .container .pic {
@@ -358,7 +363,7 @@ button.like, button.bookmark {
     border: 0;
 }
 .fas.fa-heart {
-    color: #cf0c0c;
+    color: rgb(244, 62, 62);
 }
 
 
