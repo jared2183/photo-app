@@ -1,7 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import LikeButton from './LikeButton';
 import BookmarkButton from './BookmarkButton';
 import AddComment from './AddComment';
+import Modal from './Modal';
 
 import {getHeaders} from './utils';
 
@@ -16,6 +19,7 @@ class Post extends React.Component {
         // console.log(this.state.post);
 
         this.requeryPost = this.requeryPost.bind(this);
+        this.openModal = this.openModal.bind(this);
     }
 
     requeryPost() {
@@ -39,6 +43,15 @@ class Post extends React.Component {
                 });
             });
     }
+
+    openModal() {
+        console.log('hello beautiful');
+
+        ReactDOM.render(
+            <Modal model={this.state.post} />,
+            document.getElementById('modal')
+        )
+    }
     
     render () {
         const post = this.state.post;
@@ -51,7 +64,11 @@ class Post extends React.Component {
 
         let commentButton = null;
         if (post.comments.length > 1) {
-            commentButton = <button className="link">View all {post.comments.length} comments</button>
+            commentButton = <button
+                className="link"
+                onClick={this.openModal}>
+                    View all {post.comments.length} comment
+            </button>
         }
         
         let commentPreview = null;
@@ -91,6 +108,7 @@ class Post extends React.Component {
                             <i className="far fa-comment"></i>
                             <i className="far fa-paper-plane"></i>
                         </div>
+
                         <div>
                             <BookmarkButton
                                 postId={post.id}
@@ -98,14 +116,18 @@ class Post extends React.Component {
                                 requeryPost={this.requeryPost} />
                         </div>
                     </div>
+
                     <p className="likes">
                         <strong>{(post.likes.length + " like" + (post.likes.length === 1 ? "" : "s"))}</strong>
                     </p>
+
                     <div className="caption">
                         <p><strong>{post.user.username}</strong>{post.caption}</p>
                         <p className="timestamp">{post.display_time}</p>
                     </div>
+
                     {commentButton}
+
                     {commentPreview}
                 </div>
                 <AddComment

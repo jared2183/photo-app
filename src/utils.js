@@ -20,7 +20,7 @@ function setCookie(name, val) {
     d.setTime(d.getTime() + (days*24*60*60*1000));
     const expires = "expires="+ d.toUTCString();
     document.cookie = name + "=" + val + ";" + expires;
-  }
+}
 
 export function setAccessTokenCookie(username, password, callback) {
     const postData = {

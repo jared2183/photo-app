@@ -46,16 +46,19 @@ class App extends React.Component {
 
         return (
             <div>
-                <NavBar profile={profile}/>
-                <aside>
-                    <Profile profile={profile}/>
-                    <Suggestions profile={profile}/>
-                </aside>
+                <div id="page">
+                    <NavBar profile={profile}/>
+                    <aside>
+                        <Profile profile={profile}/>
+                        <Suggestions profile={profile}/>
+                    </aside>
 
-                <main className="content">
-                    <Stories />
-                    <Posts />
-                </main>
+                    <main className="content">
+                        <Stories />
+                        <Posts />
+                    </main>
+                </div>
+                <div id="modal"></div>
             </div>
         );
     }
