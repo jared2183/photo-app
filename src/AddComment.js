@@ -12,17 +12,10 @@ class AddComment extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.submitOnEnter = this.submitOnEnter.bind(this);
     }
 
     handleChange(event) {
         this.setState({ value: event.target.value });
-    }
-
-    submitOnEnter(event) {
-        if (event.key === 'Enter') {
-            console.log('do validate');
-          }
     }
 
     handleSubmit(event) {
@@ -53,7 +46,7 @@ class AddComment extends React.Component {
             <form className="add-comment">
                 <div className="input-holder">
                     <input type="text" className="comment-textbox" aria-label="Add a comment" placeholder="Add a comment..." 
-                    value={this.state.value} onChange={this.handleChange} onKeyDown={this.submitOnEnter} ref={this.textInput}>
+                    value={this.state.value} onChange={this.handleChange} ref={this.textInput}>
                     </input>
                 </div>
                 <button className="link" onClick={this.handleSubmit}>Post</button>
